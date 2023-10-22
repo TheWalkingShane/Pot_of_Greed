@@ -24,15 +24,15 @@ public class MazeGenerator : MonoBehaviour
                 maze[x, y] = new MazeCell(x, y);
             }
         }
-         CarvePath(startX, startY);
-         return maze;
+        CarvePath(startX, startY);
+        return maze;
     }
     
     List<Direction> directions = new List<Direction> { //list of directions that we can go for the maze
         Direction.Up, Direction.Down, Direction.Left, Direction.Right
     };
 
-    List<Direction> getRandomDirections() {
+    List<Direction> GetRandomDirections() {
         //makes a copy of our directions list that we can mess around with
         List<Direction> dir = new List<Direction>(directions);
 
@@ -52,13 +52,17 @@ public class MazeGenerator : MonoBehaviour
     bool IsCellValid(int x, int y)
     {
         //if the cell is outside of the map or has already been visited, we consider it not valid.
-        if (x < 0 || y < 0 || x > mazeWidth - 1 || y > mazeHeight - 1 || maze[x, y].visited) return false;
-        else return true;
+        if (x < 0 || y < 0 || x > mazeWidth - 1 || y > mazeHeight - 1 || maze[x, y].visited)
+        {
+            return false;
+        }else {
+            return true;
+        }
     }
 
-    Vector2Int checkNeighbours()
+    Vector2Int CheckNeighbours()
     {
-        List<Direction> rndDir = getRandomDirections();
+        List<Direction> rndDir = GetRandomDirections();
 
         for (int i = 0; i < rndDir.Count; i++) {
             //set neighbour coordinates to current cell for now.
@@ -72,16 +76,19 @@ public class MazeGenerator : MonoBehaviour
                 case Direction.Down:
                     neighbour.y--;
                     break;
-                case Direction.Left:
-                    neighbour.x--;
-                    break;
                 case Direction.Right:
                     neighbour.x++;
                     break;
+                case Direction.Left:
+                    neighbour.x--;
+                    break;
+
             }
 
             //if the neighbour we just tried is valid, we can return that neighbor. if not, we go again.
-            if (IsCellValid(neighbour.x, neighbour.y)) return neighbour;
+            if (IsCellValid(neighbour.x, neighbour.y)){
+                return neighbour;
+            }
         }
         // if we tried all directions and didn't find a valid neighbour. we return the currentCell values.
         return currentCell;
@@ -97,7 +104,7 @@ public class MazeGenerator : MonoBehaviour
             
         } else if (primaryCell.x < secondaryCell.x) { //secondary cell's left wall
                      
-                     maze[primaryCell.x, primaryCell.y].leftWall = false;
+            maze[secondaryCell.x, secondaryCell.y].leftWall = false;
                      
         } else if (primaryCell.y < secondaryCell.y) { // primary cell's top wall
             
@@ -105,7 +112,7 @@ public class MazeGenerator : MonoBehaviour
             
         } else if (primaryCell.y > secondaryCell.y) { // secondary cell's top wall
             
-            maze[primaryCell.x, primaryCell.y].topWall = false;
+            maze[secondaryCell.x, secondaryCell.y].topWall = false;
             
         }
     }
@@ -131,7 +138,7 @@ public class MazeGenerator : MonoBehaviour
         while (!deadEnd) {
             
             //get the next cell we are going to try
-            Vector2Int nextCell = checkNeighbours();
+            Vector2Int nextCell = CheckNeighbours();
     
             // if that cell has no valid neighbours, set deadend to true so we break out of the loop
             if (nextCell == currentCell) {
@@ -140,10 +147,12 @@ public class MazeGenerator : MonoBehaviour
                 {
                     currentCell = path[i];                      //set currentcell to the next step along out path
                     path.RemoveAt(i);                           // remove this step from the path
-                    nextCell = checkNeighbours();               // check that cell to see if any other neighbour are valid
+                    nextCell = CheckNeighbours();               // check that cell to see if any other neighbour are valid
                     
                     // if we find a valid neighbour break out of the loop
-                    if (nextCell != currentCell) break;
+                    if (nextCell != currentCell) {
+                        break;
+                    }
                 }
 
                 if (nextCell == currentCell) {

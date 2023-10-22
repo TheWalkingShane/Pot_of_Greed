@@ -244,8 +244,8 @@ Transform:
   - {fileID: 1974941424757818176}
   - {fileID: 5057199275159526302}
   - {fileID: 1066728385160124927}
-  - {fileID: 5547213203076190204}
   - {fileID: 8320295555948875141}
+  - {fileID: 5547213203076190204}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2479077305038865349
@@ -260,8 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf085abf682e1f468a5b3f12fc8bd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topWall: {fileID: 8054413550942451954}
-  bottomWall: {fileID: 8413326706719658477}
+  topWall: {fileID: 8413326706719658477}
+  bottomWall: {fileID: 8054413550942451954}
   rightWall: {fileID: 3656697787122545037}
   leftWall: {fileID: 2884812779381536616}
 --- !u!1 &3656697787122545037
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 4940194518135081049}
   - component: {fileID: 604919886598740167}
   m_Layer: 0
-  m_Name: TopWall
+  m_Name: BottomWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,7 +487,7 @@ GameObject:
   - component: {fileID: 5604942230114876772}
   - component: {fileID: 1342305559475261816}
   m_Layer: 0
-  m_Name: BottomWall
+  m_Name: TopWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
