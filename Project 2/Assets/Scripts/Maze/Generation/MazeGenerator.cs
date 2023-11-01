@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,10 +9,9 @@ using Random = UnityEngine.Random;
 public class MazeGenerator : MonoBehaviour
 {
     [Range(5, 500)]
-
+    
     public int mazeWidth = 5, mazeHeight = 5; //The Dimensions of the maze.
     public int startX, startY;//The position our algorithm will start from.
-
     private MazeCell[,] maze;  //An array of maze cells representing the maze grid.
     private Vector2Int currentCell; //The maze cell we are currently looking at.
 
@@ -168,6 +168,9 @@ public class MazeGenerator : MonoBehaviour
             }
         }
     }
+    
+    
+   
 }
 
 
