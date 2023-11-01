@@ -9,18 +9,42 @@ public class CardPlacement : MonoBehaviour
     public GameObject card;
     private GameObject selected = null;
     public SlotTracking ST;
-    private int numOfCards;
+    private int numOfSpecials;
+    private int numOfBaseKit;
     public Transform[] slotPositions = new Transform[3];
     private Vector3 storedPos;
     private bool debounce = false;
+    private GameObject currCard;
+    public CardLookUp CLU;
+    public Card[] baseKit;
 
     private void Start()
     {
+        numOfBaseKit = 2; //Not set in stone (Will be changed later)
+        
+        //Set baseKit list manually
+        baseKit = new Card[numOfBaseKit];
+        baseKit[0] = CLU.cardList[0];
+        baseKit[1] = CLU.cardList[1];
+        
+        //currHand is just a transform for storage
         currHand = this.gameObject;
-        numOfCards = 4; //Set somehow once inventory is set up
-        for (int i = 0; i < numOfCards; i++)
+        numOfSpecials = 4; //Set somehow once inventory is set up
+        for (int i = 0; i < numOfBaseKit; i++)
         {
-            Instantiate(card, currHand.transform.GetChild(i).transform);
+            currCard = Instantiate(card, currHand.transform.GetChild(i).transform); //Instantiate visual object for card
+            currCard.GetComponent<CardInfo>().setCard(baseKit[i].health, baseKit[i].damage); //Set current instantiated card to the baseKit card at index i
+            //Check if card has a texture stored
+            if (baseKit[i].cardImage != null)
+            {
+                currCard.GetComponent<MeshRenderer>().material.mainTexture = baseKit[i].cardImage; //Use card texture
+            }
+        }
+
+        for (int i = 0; i < numOfSpecials; i++)
+        {
+            currCard = Instantiate(card, currHand.transform.GetChild(i + numOfBaseKit).transform); //Instantiate visual object for card
+            //Todo read card from inventory and add it to hand
         }
     }
 
@@ -48,7 +72,7 @@ public class CardPlacement : MonoBehaviour
                         debounce = true;
                     }
 
-                    if (selected != null && selected.transform.position != hit.transform.position)
+                    if (selected != null && selected.transform.position != hit.transform.position) //Check to see if selected card is in the same spot as the placed one
                     {
                         //set previously selected card to it's original position
                         selected.transform.position = storedPos;
@@ -108,6 +132,7 @@ public class CardPlacement : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            //debounce so card can't be clicked 1000000 times from mouse being held down (Mainly for deselecting an already selected card)
             debounce = false;
         }
     }

@@ -11,7 +11,8 @@ public struct Card
         BaseKit, 
         Special
     }
-
+    
+    //Type is more for visual documentation for programmer
     public CardType type;
     public int health;
     public int damage;
