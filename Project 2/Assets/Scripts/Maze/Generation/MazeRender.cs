@@ -1,11 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class MazeRender : MonoBehaviour
 {
     [SerializeField] MazeGenerator mazeGenerator;
     [SerializeField] GameObject MazeCellPrefab;
+    [SerializeField] NavMeshSurface navMeshSurface; // Bakes the Floor of the maze.
+
 
     // this te pysical size of our maze cells. getting this wrong will result in overlapping
     // or visible gaps between each cell
@@ -48,5 +52,14 @@ public class MazeRender : MonoBehaviour
                 mazeCell.Init(top,bottom,right,left);
             }
         }
+        
+        
+        BakeNavMesh(); //calls it to be baked once finished going through every cell
+    }
+    
+    void BakeNavMesh()
+    {
+        navMeshSurface.BuildNavMesh();// Bakes the maze after it's finished,
+        Debug.Log("it baked");
     }
 }
