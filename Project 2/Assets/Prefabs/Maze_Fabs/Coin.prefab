@@ -86,31 +86,29 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b32c010e123a85243b72f664642314f2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3321911051468652415}
+      addedObject: {fileID: 3960440247859830911}
   m_SourcePrefab: {fileID: 100100000, guid: b32c010e123a85243b72f664642314f2, type: 3}
 --- !u!1 &2554623270148936733 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b32c010e123a85243b72f664642314f2, type: 3}
   m_PrefabInstance: {fileID: 3437004653313763660}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &3321911051468652415
-Animator:
-  serializedVersion: 5
+--- !u!114 &3960440247859830911
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2554623270148936733}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 451979db33fe1f04cb137f9871dfd78f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

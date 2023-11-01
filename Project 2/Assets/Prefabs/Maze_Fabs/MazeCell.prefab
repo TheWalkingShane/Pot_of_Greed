@@ -668,7 +668,7 @@ Transform:
   - {fileID: 193616384622938683}
   - {fileID: 6955746292187130791}
   - {fileID: 2540109882632515693}
-  - {fileID: 871841775791160776}
+  - {fileID: 1240637660049622946}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7096374151174040547
@@ -687,8 +687,8 @@ MonoBehaviour:
   bottomWall: {fileID: 7189831637335027073}
   rightWall: {fileID: 3368164982218191309}
   leftWall: {fileID: 862346856545198488}
-  middleCoin: {fileID: 527686233033336690}
---- !u!1001 &2603484659454866287
+  middleCoin: {fileID: 2554623270148936733, guid: 12d497e730f68704da70c1ac130b790e, type: 3}
+--- !u!1001 &4111691456130189573
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -740,22 +740,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3321911051468652415, guid: 12d497e730f68704da70c1ac130b790e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12d497e730f68704da70c1ac130b790e, type: 3}
---- !u!1 &527686233033336690 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2554623270148936733, guid: 12d497e730f68704da70c1ac130b790e, type: 3}
-  m_PrefabInstance: {fileID: 2603484659454866287}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &871841775791160776 stripped
+--- !u!4 &1240637660049622946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2898076224991317671, guid: 12d497e730f68704da70c1ac130b790e, type: 3}
-  m_PrefabInstance: {fileID: 2603484659454866287}
+  m_PrefabInstance: {fileID: 4111691456130189573}
   m_PrefabAsset: {fileID: 0}
