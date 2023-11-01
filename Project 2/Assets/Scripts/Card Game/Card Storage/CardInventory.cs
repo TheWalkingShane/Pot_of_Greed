@@ -9,20 +9,35 @@ using UnityEngine;
 /// </summary>
 public class CardInventory : MonoBehaviour
 {
-    public static CardInventory Instance;
+    public static CardInventory instance = null;
     private static List<Card> _cards;
     public CardLookUp cardSelection;
 
+    public int testCounter;
+
     void Awake()
     {
-        Instance = this;
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            testCounter = 0;
+            DontDestroyOnLoad(this);
+        }
+    }
+
+    void Start()
+    {
         InitInventory();
-        DontDestroyOnLoad(this);
     }
 
     // Fills the inventory with the default cards
     void InitInventory()
     {
+        _cards = new List<Card>();
         _cards.AddRange(cardSelection.cardList);
     }
 

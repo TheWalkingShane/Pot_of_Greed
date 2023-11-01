@@ -32,5 +32,6 @@ public class SceneSwitcher : MonoBehaviour
     {
         Debug.Log("Switching to " + scene);
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        // Debug.Log("Counter = " + CardInventory.instance.testCounter++);
     }
 }
