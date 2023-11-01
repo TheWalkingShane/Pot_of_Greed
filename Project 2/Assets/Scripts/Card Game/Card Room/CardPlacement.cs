@@ -8,12 +8,17 @@ public class CardPlacement : MonoBehaviour
     private GameObject currHand;
     public GameObject card;
     private GameObject selected = null;
-    private int[] cardSlots = new int[3];
+    public SlotTracking ST;
+    private int numOfCards;
+    public Transform[] slotPositions = new Transform[3];
+    private Vector3 storedPos;
+    private bool debounce = false;
 
     private void Start()
     {
         currHand = this.gameObject;
-        for (int i = 0; i < currHand.transform.childCount; i++)
+        numOfCards = 4; //Set somehow once inventory is set up
+        for (int i = 0; i < numOfCards; i++)
         {
             Instantiate(card, currHand.transform.GetChild(i).transform);
         }
@@ -31,45 +36,79 @@ public class CardPlacement : MonoBehaviour
                 Debug.Log(hit.transform.tag);
                 if (hit.transform.CompareTag("Card"))
                 {
+                    //if Card is hit, check if they have a card selected already
                     if (selected == null)
                     {
+                        //save original position
+                        storedPos = hit.transform.position;
+                        //shift card up to indicate that it's selected
                         hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 0.2f, hit.transform.position.z);
+                        //save card as selected
                         selected = hit.transform.gameObject;
+                        debounce = true;
                     }
 
                     if (selected != null && selected.transform.position != hit.transform.position)
                     {
-                        selected.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y - 0.2f, selected.transform.position.z);
+                        //set previously selected card to it's original position
+                        selected.transform.position = storedPos;
+                        //save new position
+                        storedPos = hit.transform.position;
+                        //shift new card up
                         hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 0.2f, hit.transform.position.z);
+                        //make new card the selected card
                         selected = hit.transform.gameObject;
+                        debounce = true;
+                    }
+                    else if (selected != null && selected.transform.position == hit.transform.position && !debounce)
+                    {
+                        //set previously selected card to it's original position
+                        selected.transform.position = storedPos;
+                        // clear selected
+                        selected = null;
                     }
                     
                 }
                 if (hit.transform.CompareTag("CardSlot") && selected != null)
                 {
-                    if (hit.transform.GetChild(0).name == "Num1" && cardSlots[0] == 0)
+                    //if CardSlot is hit, check the name for its placement
+                    if (hit.transform.name == "CardSlot 1" && !ST.isTaken(0))
                     {
-                        cardSlots[0] = 1;
-                        selected.transform.position = hit.transform.GetChild(6).position;
+                        //check to see if slot is taken
+                        ST.fillSlot(0);
+                        //put selected card at position and rotation of card slot
+                        selected.transform.position = slotPositions[0].position;
                         selected.transform.rotation = Quaternion.Euler(0,0,0);
+                        //set selected card to null
                         selected = null;
                     }
-                    if (hit.transform.GetChild(0).name == "Num2" && cardSlots[1] == 0)
+                    if (hit.transform.name == "CardSlot 2" && !ST.isTaken(1))
                     {
-                        cardSlots[1] = 1;
-                        selected.transform.position = hit.transform.GetChild(6).position;
+                        //check to see if slot is taken
+                        ST.fillSlot(1);
+                        //put selected card at position and rotation of card slot
+                        selected.transform.position = slotPositions[1].position;
                         selected.transform.rotation = Quaternion.Euler(0,0,0);
+                        //set selected card to null
                         selected = null;
                     }
-                    if (hit.transform.GetChild(0).name == "Num3" && cardSlots[2] == 0)
+                    if (hit.transform.name == "CardSlot 3" && !ST.isTaken(2))
                     {
-                        cardSlots[2] = 1;
-                        selected.transform.position = hit.transform.GetChild(6).position;
+                        //check to see if slot is taken
+                        ST.fillSlot(2);
+                        //put selected card at position and rotation of card slot
+                        selected.transform.position = slotPositions[2].position;
                         selected.transform.rotation = Quaternion.Euler(0,0,0);
+                        //set selected card to null
                         selected = null;
                     }
                 }
             }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            debounce = false;
         }
     }
 }
