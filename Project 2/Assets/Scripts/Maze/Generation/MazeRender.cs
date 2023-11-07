@@ -41,6 +41,8 @@ public class MazeRender : MonoBehaviour
                 bool right = false;
                 bool bottom = false;
 
+                bool coin = true;
+
                 if (x == mazeGenerator.mazeWidth -1) {
                     right = true;
                 }
@@ -48,8 +50,7 @@ public class MazeRender : MonoBehaviour
                     bottom = true;
                 }
                 
-                
-                mazeCell.Init(top,bottom,right,left);
+                mazeCell.Init(top,bottom,right,left, coin);
             }
         }
         
