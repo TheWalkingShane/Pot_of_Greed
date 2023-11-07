@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class CardPlacement : MonoBehaviour
@@ -93,33 +94,30 @@ public class CardPlacement : MonoBehaviour
                     }
                     
                 }
-                if (hit.transform.CompareTag("CardSlot") && selected != null)
+                if (hit.transform.CompareTag("CardSlot") && selected != null) //Handles where card is placed
                 {
                     //if CardSlot is hit, check the name for its placement
-                    if (hit.transform.name == "CardSlot 1" && !ST.isTaken(0))
+                    if (hit.transform.name == "CardSlot 1" && !ST.isTaken(0)) //check to see if slot is taken
                     {
-                        //check to see if slot is taken
-                        ST.fillSlot(0);
+                        ST.fillSlot(0, selected);
                         //put selected card at position and rotation of card slot
                         selected.transform.position = slotPositions[0].position;
                         selected.transform.rotation = Quaternion.Euler(0,0,0);
                         //set selected card to null
                         selected = null;
                     }
-                    if (hit.transform.name == "CardSlot 2" && !ST.isTaken(1))
+                    if (hit.transform.name == "CardSlot 2" && !ST.isTaken(1))//check to see if slot is taken
                     {
-                        //check to see if slot is taken
-                        ST.fillSlot(1);
+                        ST.fillSlot(1, selected);
                         //put selected card at position and rotation of card slot
                         selected.transform.position = slotPositions[1].position;
                         selected.transform.rotation = Quaternion.Euler(0,0,0);
                         //set selected card to null
                         selected = null;
                     }
-                    if (hit.transform.name == "CardSlot 3" && !ST.isTaken(2))
+                    if (hit.transform.name == "CardSlot 3" && !ST.isTaken(2))//check to see if slot is taken
                     {
-                        //check to see if slot is taken
-                        ST.fillSlot(2);
+                        ST.fillSlot(2, selected);
                         //put selected card at position and rotation of card slot
                         selected.transform.position = slotPositions[2].position;
                         selected.transform.rotation = Quaternion.Euler(0,0,0);
@@ -135,5 +133,20 @@ public class CardPlacement : MonoBehaviour
             //debounce so card can't be clicked 1000000 times from mouse being held down (Mainly for deselecting an already selected card)
             debounce = false;
         }
+        
+        //Example / Test for getting card information through the slots
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     GameObject card1;
+        //     CardInfo card1I;
+        //     GameObject card2;
+        //     CardInfo card2I;
+        //     card1 = ST.getCard(0);
+        //     card2 = ST.getCard(1);
+        //     card1I = card1.GetComponent<CardInfo>();
+        //     card2I = card2.GetComponent<CardInfo>();
+        //     Debug.Log(card1I.health + " | " + card1I.damage);
+        //     Debug.Log(card2I.health + " | " + card2I.damage);
+        // }
     }
 }

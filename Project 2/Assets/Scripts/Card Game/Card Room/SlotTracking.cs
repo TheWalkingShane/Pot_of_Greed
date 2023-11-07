@@ -5,6 +5,7 @@ using UnityEngine;
 public class SlotTracking : MonoBehaviour
 {
     private bool[] slots = new bool[3];
+    private GameObject[] cards = new GameObject[3];
     
     void Start()
     {
@@ -18,13 +19,20 @@ public class SlotTracking : MonoBehaviour
         return slots[slot];
     }
 
-    public void fillSlot(int slot)
+    public GameObject getCard(int slot)
+    {
+        return cards[slot];
+    }
+
+    public void fillSlot(int slot, GameObject card)
     {
         slots[slot] = true;
+        cards[slot] = card;
     }
 
     public void emptySlot(int slot)
     {
         slots[slot] = false;
+        cards[slot] = null;
     }
 }
