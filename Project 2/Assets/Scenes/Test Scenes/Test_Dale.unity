@@ -370,37 +370,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482296819}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &488763751
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 488763752}
-  m_Layer: 0
-  m_Name: Num2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &488763752
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 488763751}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1872454683}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &556425489
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,37 +641,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604212317}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &658892836
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 658892837}
-  m_Layer: 0
-  m_Name: Num1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &658892837
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658892836}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1794073164}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &872801172
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,37 +772,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &964953095
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 964953096}
-  m_Layer: 0
-  m_Name: Num3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &964953096
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964953095}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1086278708}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1086278707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -875,7 +782,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3669774799611822692, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
       propertyPath: m_Name
-      value: CardSlot
+      value: CardSlot 3
       objectReference: {fileID: 0}
     - target: {fileID: 5761481740447660935, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -919,10 +826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5761481740447660935, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 964953096}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
 --- !u!4 &1086278708 stripped
@@ -1230,7 +1134,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3669774799611822692, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
       propertyPath: m_Name
-      value: CardSlot
+      value: CardSlot 2
       objectReference: {fileID: 0}
     - target: {fileID: 5761481740447660935, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1274,10 +1178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5761481740447660935, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 488763752}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
 --- !u!4 &1872454683 stripped
@@ -1530,6 +1431,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915249553}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1926305519 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 346470291823784271, guid: 586d9a8f58f55af40b119ed9c1cf8957, type: 3}
+  m_PrefabInstance: {fileID: 8916320334072671015}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb29c44aa0462a4d9d9626adac1315f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1982649597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,11 +1522,11 @@ MonoBehaviour:
   - type: 0
     health: 1
     damage: 1
-    cardImage: {fileID: 0}
+    cardImage: {fileID: 2800000, guid: a4f72be87c399b44cbcd87008a9abd39, type: 3}
   - type: 0
     health: 2
     damage: 1
-    cardImage: {fileID: 0}
+    cardImage: {fileID: 2800000, guid: a4f72be87c399b44cbcd87008a9abd39, type: 3}
 --- !u!114 &2104798408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1638,7 +1550,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3669774799611822692, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
       propertyPath: m_Name
-      value: CardSlot
+      value: CardSlot 1
       objectReference: {fileID: 0}
     - target: {fileID: 4675781885663717698, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
       propertyPath: m_Enabled
@@ -1686,10 +1598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5761481740447660935, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 658892837}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cbc6eeadef58494c920f89b80dec66f, type: 3}
 --- !u!1001 &8916320334072671015
@@ -1740,6 +1649,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3671158164312070004, guid: 586d9a8f58f55af40b119ed9c1cf8957, type: 3}
+      propertyPath: ST
+      value: 
+      objectReference: {fileID: 1926305519}
+    - target: {fileID: 3671158164312070004, guid: 586d9a8f58f55af40b119ed9c1cf8957, type: 3}
+      propertyPath: CLU
+      value: 
+      objectReference: {fileID: 2104798407}
+    - target: {fileID: 3671158164312070004, guid: 586d9a8f58f55af40b119ed9c1cf8957, type: 3}
+      propertyPath: slotPositions.Array.data[0]
+      value: 
+      objectReference: {fileID: 1794073164}
+    - target: {fileID: 3671158164312070004, guid: 586d9a8f58f55af40b119ed9c1cf8957, type: 3}
+      propertyPath: slotPositions.Array.data[1]
+      value: 
+      objectReference: {fileID: 1872454683}
+    - target: {fileID: 3671158164312070004, guid: 586d9a8f58f55af40b119ed9c1cf8957, type: 3}
+      propertyPath: slotPositions.Array.data[2]
+      value: 
+      objectReference: {fileID: 1086278708}
     - target: {fileID: 8203687232000555485, guid: 586d9a8f58f55af40b119ed9c1cf8957, type: 3}
       propertyPath: m_Name
       value: CurrentHand
