@@ -290,6 +290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2158270735552888838}
   - component: {fileID: 3671158164312070004}
+  - component: {fileID: 346470291823784271}
   m_Layer: 0
   m_Name: CurrentHand
   m_TagString: Untagged
@@ -333,6 +334,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 8975649530202833115, guid: 1b8f9b0b96347d7499ea94955cbcf01f, type: 3}
+  ST: {fileID: 346470291823784271}
+  slotPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &346470291823784271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203687232000555485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb29c44aa0462a4d9d9626adac1315f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8909237786496088678
 GameObject:
   m_ObjectHideFlags: 0
