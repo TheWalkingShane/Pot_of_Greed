@@ -6,7 +6,6 @@ TagManager:
   tags:
   - CardSlot
   - Card
-  - Coin
   layers:
   - Default
   - TransparentFX
