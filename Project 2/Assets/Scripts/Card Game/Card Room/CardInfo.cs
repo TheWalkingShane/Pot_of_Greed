@@ -22,6 +22,11 @@ public class CardInfo : MonoBehaviour
         textD.text = $"ATK: {this.damage}";
     }
 
+    private void Update()
+    {
+        displayInfo();
+    }
+
     public void setCard(int health, int damage)
     {
         this.health = health;
