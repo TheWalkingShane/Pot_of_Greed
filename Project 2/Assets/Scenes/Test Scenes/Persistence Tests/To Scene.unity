@@ -258,6 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1279689396}
+  - component: {fileID: 1279689395}
   - component: {fileID: 1279689394}
   m_Layer: 0
   m_Name: PrototypeManger
@@ -290,6 +291,18 @@ MonoBehaviour:
     cardImage: {fileID: 0}
   specialCardCapacity: 10
   specialCardList: []
+--- !u!114 &1279689395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279689393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7b9c1bdc446514e8049cd736bc19f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1279689396
 Transform:
   m_ObjectHideFlags: 0
@@ -409,7 +422,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1725184508}
   - component: {fileID: 1725184507}
-  - component: {fileID: 1725184509}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -446,19 +458,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1725184509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725184506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb7b9c1bdc446514e8049cd736bc19f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraGO: {fileID: 0}
 --- !u!1 &1732742304
 GameObject:
   m_ObjectHideFlags: 0
