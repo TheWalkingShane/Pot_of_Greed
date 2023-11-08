@@ -12,11 +12,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Plane
-    second: {fileID: 10756, guid: 0000000000000000e000000000000000, type: 0}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: spiral
     second: {fileID: 2100000, guid: 7e45da26c5d40de458be603b228d2444, type: 2}
   materials:
