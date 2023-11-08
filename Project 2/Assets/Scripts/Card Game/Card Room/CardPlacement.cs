@@ -21,16 +21,18 @@ public class CardPlacement : MonoBehaviour
 
     private void Start()
     {
-        numOfBaseKit = 2; //Not set in stone (Will be changed later)
+        numOfBaseKit = 4; //Not set in stone (Will be changed later)
         
         //Set baseKit list manually
         baseKit = new Card[numOfBaseKit];
         baseKit[0] = CLU.cardList[0];
         baseKit[1] = CLU.cardList[1];
+        baseKit[2] = CLU.cardList[2];
+        baseKit[3] = CLU.cardList[3];
         
         //currHand is just a transform for storage
         currHand = this.gameObject;
-        numOfSpecials = 4; //Set somehow once inventory is set up
+        numOfSpecials = 0; //Set somehow once inventory is set up
         for (int i = 0; i < numOfBaseKit; i++)
         {
             currCard = Instantiate(card, currHand.transform.GetChild(i).transform); //Instantiate visual object for card

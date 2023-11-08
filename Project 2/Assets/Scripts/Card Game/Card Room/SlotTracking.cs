@@ -6,7 +6,7 @@ public class SlotTracking : MonoBehaviour
 {
     private bool[] slots = new bool[3];
     private GameObject[] cards = new GameObject[3];
-    
+
     void Start()
     {
         slots[0] = false;
