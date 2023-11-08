@@ -45,6 +45,10 @@ PrefabInstance:
       propertyPath: oriebtation
       value: 
       objectReference: {fileID: 8776167582446085077}
+    - target: {fileID: 4729617355080415955, guid: c81a9ec0f783aaf4a905b2ecf8488114, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0462
+      objectReference: {fileID: 0}
     - target: {fileID: 6016208966578797747, guid: c81a9ec0f783aaf4a905b2ecf8488114, type: 3}
       propertyPath: m_Name
       value: CameraHolder
@@ -113,6 +117,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 631368640188319599, guid: 5f662082f2facfe499bee914a2861346, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 631368640188319599, guid: 5f662082f2facfe499bee914a2861346, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249359268693956424, guid: 5f662082f2facfe499bee914a2861346, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3360733902777705276, guid: 5f662082f2facfe499bee914a2861346, type: 3}
