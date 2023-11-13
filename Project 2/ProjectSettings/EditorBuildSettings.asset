@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test Scenes/Persistence Tests/To Scene.unity
     guid: ca8c75c5538aa494da7af90509949097
+  - enabled: 1
+    path: Assets/Scenes/Main Scenes (DO NOT EDIT)/MazeMain.unity
+    guid: 6795b96bb8e70964e933509aa39ac8a2
+  - enabled: 1
+    path: Assets/Scenes/Main Scenes (DO NOT EDIT)/CardsMain.unity
+    guid: dacce8c509328bc44b920fc7985c53e8
   m_configObjects: {}

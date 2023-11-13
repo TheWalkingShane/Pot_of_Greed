@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-
     private static SwitcherMethod _method = SwitcherMethod.Additive;
     private GameObject cameraParent;
-    
+    public string toScene = "MazeMain";
+    public string fromScene = "CardsMain";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,31 +24,29 @@ public class SceneSwitcher : MonoBehaviour
             if (_method == SwitcherMethod.Swap)
             {
                 // Swap to the From Scene
-                SwapToScene("From Scene");
+                SwapToScene(fromScene);
             }
             else
             {
-                TryRemoveScene("From Scene");
+                TryRemoveScene(fromScene);
             }
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             if (_method == SwitcherMethod.Swap)
                 // Swap to the To Scene
-                SwapToScene("To Scene");
+                SwapToScene(toScene);
             else
             {
-                AddScene("From Scene");
+                AddScene(fromScene);
             }
         }
-}
-    
+    }
+
     void SwapToScene(string scene)
     {
-        Debug.Log("Switching to " + scene);
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
-        // Debug.Log("Counter = " + CardInventory.instance.testCounter++);
     }
 
     // Additively load scene
@@ -55,9 +54,12 @@ public class SceneSwitcher : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name.Equals(scene) || SceneManager.sceneCount > 1)
             return;
-        
+
         cameraParent.SetActive(false);
         SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // Unload additively loaded scene
@@ -65,9 +67,12 @@ public class SceneSwitcher : MonoBehaviour
     {
         if (SceneManager.sceneCount == 1)
             return;
-        
+
         SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.None);
         cameraParent.SetActive(true);
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private enum SwitcherMethod
