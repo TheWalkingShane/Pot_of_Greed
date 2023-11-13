@@ -6,20 +6,20 @@ using UnityEngine.SceneManagement;
 public class SceneSwitcher : MonoBehaviour
 {
     private static SwitcherMethod _method = SwitcherMethod.Additive;
-    private GameObject cameraParent;
+    private GameObject playerGO;
     public string toScene = "MazeMain";
     public string fromScene = "CardsMain";
 
     // Start is called before the first frame update
     void Start()
     {
-        cameraParent = FindObjectOfType<AudioListener>().gameObject.gameObject;
+        playerGO = FindObjectOfType<AudioListener>().transform.parent.parent.gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (_method == SwitcherMethod.Swap)
             {
@@ -32,7 +32,7 @@ public class SceneSwitcher : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad2))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             if (_method == SwitcherMethod.Swap)
                 // Swap to the To Scene
@@ -55,7 +55,7 @@ public class SceneSwitcher : MonoBehaviour
         if (SceneManager.GetActiveScene().name.Equals(scene) || SceneManager.sceneCount > 1)
             return;
 
-        cameraParent.SetActive(false);
+        playerGO.SetActive(false);
         SceneManager.LoadScene(scene, LoadSceneMode.Additive);
         
         Cursor.lockState = CursorLockMode.None;
@@ -69,7 +69,7 @@ public class SceneSwitcher : MonoBehaviour
             return;
 
         SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.None);
-        cameraParent.SetActive(true);
+        playerGO.SetActive(true);
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
