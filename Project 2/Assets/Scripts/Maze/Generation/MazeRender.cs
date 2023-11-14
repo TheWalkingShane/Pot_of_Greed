@@ -10,15 +10,23 @@ public class MazeRender : MonoBehaviour
     [SerializeField] GameObject MazeCellPrefab;
     [SerializeField] NavMeshSurface navMeshSurface; // Bakes the Floor of the maze.
 
-    public float coinProbability = 0.1f; // Starting probability of 10%
-    public float probabilityIncrease = 0.05f; // Increase probability by 5% each cell that doesn't have a coin
+    public float coinSpawnProbability = 0.1f; // Starting probability of Coins (10%)
+    public float coinProbabilityIncrease = 0.05f; // Increase probability by 5% each cell that doesn't have a coin
+   
+    public float cardSpawnProbability = 0.1f; // Starting probability for cards
+    public float cardProbabilityIncrease = 0.05f; // Increase probability for cards (5%)
+
+    
     // this te pysical size of our maze cells. getting this wrong will result in overlapping
     // or visible gaps between each cell
     public float CellSize = 1f;
 
     private void Start()
     {
-        int AllCoinCount = 0;
+        int AllCoinCount = 0; // to record how many coins spawned
+        int AllCardCount = 0; // to record how many cards spawned
+
+        
         //get our mazeGenerator script to make us a make
         MazeCell[,] maze = mazeGenerator.GetMaze();
         
@@ -55,29 +63,54 @@ public class MazeRender : MonoBehaviour
                     bottom = true;
                 }
                 
-                bool coin = UnityEngine.Random.value < coinProbability;
-                
+                bool coin = UnityEngine.Random.value < coinSpawnProbability;
+                bool card = UnityEngine.Random.value < cardSpawnProbability;
+
+                // If both a coin and a card are set to spawn, choose only one
+                if (coin && card)
+                {
+                    // Randomly choose whether to spawn a coin or a card
+                    if (UnityEngine.Random.value < 0.5f)
+                    {
+                        card = false; // Only spawn the coin, not the card
+                    }
+                    else
+                    {
+                        coin = false; // Only spawn the card, not the coin
+                    }
+                }
+
+                // Update counts and probabilities based on whether objects were spawned
                 if (coin)
                 {
                     AllCoinCount++;
-                    // If a coin is spawned, reset the probability
-                    coinProbability = 0.1f;
-                    
+                    coinSpawnProbability = 0.1f; // Reset the coin probability
                 }
                 else
                 {
-                    // If a coin is not spawned, increase the probability for the next cell
-                    coinProbability += probabilityIncrease;
+                    coinSpawnProbability += coinProbabilityIncrease; // Increase coin probability
+                }
+
+                if (card)
+                {
+                    AllCardCount++;
+                    cardSpawnProbability = 0.1f; // Reset the card probability
+                }
+                else
+                {
+                    cardSpawnProbability += cardProbabilityIncrease; // Increase card probability
                 }
                 //Debug.Log($"Cell {coinProbability}: Coin enabled = {coin}"); // testing the coin probability
 
-                mazeCell.Init(top,bottom,right,left, coin);
+                mazeCell.Init(top,bottom,right,left, coin, card);
 
             }
         }
         
         GameManager.Instance.SetTotalActiveCoins(AllCoinCount);
+        GameManager.Instance.SetTotalActiveCards(AllCardCount);
         Debug.Log("coin count total is:" + AllCoinCount);
+        Debug.Log("card count total is:" + AllCardCount);
         BakeNavMesh(); //calls it to be baked once finished going through every cell
     }
     
