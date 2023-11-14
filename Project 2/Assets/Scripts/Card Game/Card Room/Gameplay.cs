@@ -86,10 +86,10 @@ public class Gameplay : MonoBehaviour
                     {
                         sel2 = Random.Range(3, 6);
                     }
-                    currCard = Instantiate(card, storage.transform);
+                    currCard = Instantiate(card, Eslots[sel2 - 3].transform.GetChild(5).position, Quaternion.Euler(0,0,0));
                     currCard.GetComponent<CardInfo>().setCard(CLU.cardList[sel3].health, CLU.cardList[sel3].damage);
-                    currCard.transform.position = Eslots[sel2 - 3].transform.GetChild(5).position;
-                    currCard.transform.rotation = Quaternion.Euler(0,0,0);
+                    //currCard.transform.position = Eslots[sel2 - 3].transform.GetChild(5).position;
+                    //currCard.transform.rotation = Quaternion.Euler(0,0,0);
                     currCard.GetComponent<MeshRenderer>().material.mainTexture = CLU.cardList[sel3].cardImage; //Use card texture
                     ST.fillSlot(sel2, currCard);
                 }
@@ -100,10 +100,10 @@ public class Gameplay : MonoBehaviour
                     {
                         sel2 = Random.Range(3, 6);
                     }
-                    currCard = Instantiate(card, storage.transform);
+                    currCard = Instantiate(card, Eslots[sel2 - 3].transform.GetChild(5).position, Quaternion.Euler(0,0,0));
                     currCard.GetComponent<CardInfo>().setCard(CLU.specialCardList[sel3].health, CLU.specialCardList[sel3].damage);
-                    currCard.transform.position = Eslots[sel2 - 3].transform.GetChild(5).position;
-                    currCard.transform.rotation = Quaternion.Euler(0,0,0);
+                    //currCard.transform.position = Eslots[sel2 - 3].transform.GetChild(5).position;
+                    //currCard.transform.rotation = Quaternion.Euler(0,0,0);
                     currCard.GetComponent<MeshRenderer>().material.mainTexture = CLU.specialCardList[sel3].cardImage; //Use card texture
                     ST.fillSlot(sel2, currCard);
                 }
@@ -221,9 +221,11 @@ public class Gameplay : MonoBehaviour
     private void showDamage(int slot, int damage)
     {
         Vector3 offset = new Vector3(-0.05f, 0.25f, 0);
+        GameObject start = ST.getCard(slot);
+        Debug.Log(start.transform.position);
         GameObject currDamage;
-        currDamage = Instantiate(damageText, ST.getCard(slot).transform, true);
-        currDamage.transform.position = ST.getCard(slot).transform.position + offset;
+        currDamage = Instantiate(damageText, start.transform.position, new Quaternion(0f, 0f, 0f, 0f));
+        //currDamage.transform.position = ST.getCard(slot).transform.position + offset;
         currDamage.GetComponent<TextMesh>().text = $"{damage}";
     }
 }
