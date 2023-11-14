@@ -24,6 +24,7 @@ public class Gameplay : MonoBehaviour
     private bool ePressed = false;
     public TextMeshProUGUI health;
     public TextMeshProUGUI eHealth;
+    public GameObject damageText;
     
     public static event Action<GameState> OnGameStateChanged;
     private void Awake()
@@ -193,9 +194,15 @@ public class Gameplay : MonoBehaviour
 
     private void cardAttack(int offensiveSlot, int defensiveSlot, bool playerTurn)
     {
+        int tempDamage = ST.getCard(offensiveSlot).GetComponent<CardInfo>().damage;
+        if (ST.getCard(offensiveSlot).GetComponent<CardInfo>().damage <= 0)
+        {
+            return;
+        }
         if (ST.isTaken(defensiveSlot))
         {
-            ST.getCard(defensiveSlot).GetComponent<CardInfo>().dealDamage(ST.getCard(offensiveSlot).GetComponent<CardInfo>().damage);
+            ST.getCard(defensiveSlot).GetComponent<CardInfo>().dealDamage(tempDamage);
+            showDamage(defensiveSlot, tempDamage);
             if (ST.getCard(defensiveSlot).GetComponent<CardInfo>().health <= 0)
             {
                 ST.emptySlot(defensiveSlot);
@@ -203,12 +210,21 @@ public class Gameplay : MonoBehaviour
         }
         else if(playerTurn)
         {
-            this.enemyHealth -= ST.getCard(offensiveSlot).GetComponent<CardInfo>().damage;
+            this.enemyHealth -= tempDamage;
         }
         else
         {
-            this.playerHealth -= ST.getCard(offensiveSlot).GetComponent<CardInfo>().damage;
+            this.playerHealth -= tempDamage;
         }
+    }
+
+    private void showDamage(int slot, int damage)
+    {
+        Vector3 offset = new Vector3(-0.05f, 0.25f, 0);
+        GameObject currDamage;
+        currDamage = Instantiate(damageText, ST.getCard(slot).transform, true);
+        currDamage.transform.position = ST.getCard(slot).transform.position + offset;
+        currDamage.GetComponent<TextMesh>().text = $"{damage}";
     }
 }
 
