@@ -13,10 +13,11 @@ public class MonsterRoamState : MonsterBaseState
     public override void EnterState(MonsterStateManager monster){
         Debug.Log("Roaming State Started");
         navMeshAgent = monster.GetComponent<NavMeshAgent>();
-        StartCoroutine(Wander());
+        //StartCoroutine(Wander());
     }
     public override void UpdateState(MonsterStateManager monster){
         // Specific behavior during roaming if needed
+        
     }
     public override void OnCollisionEnter(MonsterStateManager monster){
         // Handle collisions during roaming if needed

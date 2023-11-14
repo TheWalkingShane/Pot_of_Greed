@@ -243,6 +243,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1066058419}
     m_Modifications:
+    - target: {fileID: 133380122904507145, guid: c98b0439910cefb4d8c1f31c9792378c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6049120289669516044, guid: c98b0439910cefb4d8c1f31c9792378c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -370,6 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1066058419}
   - component: {fileID: 1066058418}
+  - component: {fileID: 1066058420}
   m_Layer: 0
   m_Name: MazeMonster
   m_TagString: Untagged
@@ -386,7 +391,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1066058417}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.3
+  m_Radius: 0.25
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -415,6 +420,18 @@ Transform:
   - {fileID: 743774442}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1066058420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066058417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029db4bb580c50f48aac1495c0f9e891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1334682775
 GameObject:
   m_ObjectHideFlags: 0
