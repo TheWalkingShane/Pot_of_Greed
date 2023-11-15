@@ -69,12 +69,12 @@ public class Gameplay : MonoBehaviour
                 }
                 updateHealth();
                 Debug.Log("Moving to EnemyTurn");
-                StartCoroutine(turnWait(GameState.EnemyTurn));
+                StartCoroutine(turnWait(GameState.EnemyTurn, 2f));
                 break;
             case GameState.EnemyTurn:
                 if (!ST.isEslotsEmpty())
                 {
-                    StartCoroutine(turnWait(GameState.EnemyAttack));
+                    StartCoroutine(turnWait(GameState.EnemyAttack, 2f));
                     break;
                 }
                 int sel1 = Random.Range(1, 3); //Decides basekit or specialty
@@ -109,7 +109,7 @@ public class Gameplay : MonoBehaviour
                 }
                 
                 Debug.Log("EnemyAttack");
-                StartCoroutine(turnWait(GameState.EnemyAttack));
+                StartCoroutine(turnWait(GameState.EnemyAttack, 2f));
                 break;
             case GameState.EnemyAttack:
                 if (ST.isTaken(3))
@@ -134,7 +134,7 @@ public class Gameplay : MonoBehaviour
                 
                 updateHealth();
                 Debug.Log("Moving to PlayerTurn");
-                StartCoroutine(turnWait(GameState.PlayerTurn));
+                StartCoroutine(turnWait(GameState.PlayerTurn, 1f));
                 break;
             case GameState.Lose:
                 //Play animation (possibly) and end game / go back to main menu
@@ -180,9 +180,9 @@ public class Gameplay : MonoBehaviour
         Debug.Log("Player Attack");
         UpdateGameState(GameState.PlayerAttack);
     }
-    private IEnumerator turnWait(GameState newState) {
+    private IEnumerator turnWait(GameState newState, float wait) {
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(wait);
         UpdateGameState(newState);
     }
 
@@ -194,8 +194,9 @@ public class Gameplay : MonoBehaviour
 
     private void cardAttack(int offensiveSlot, int defensiveSlot, bool playerTurn)
     {
-        int tempDamage = ST.getCard(offensiveSlot).GetComponent<CardInfo>().damage;
-        if (ST.getCard(offensiveSlot).GetComponent<CardInfo>().damage <= 0)
+        GameObject off = ST.getCard(offensiveSlot);
+        int tempDamage = off.GetComponent<CardInfo>().damage;
+        if (tempDamage <= 0)
         {
             return;
         }
@@ -217,15 +218,12 @@ public class Gameplay : MonoBehaviour
             this.playerHealth -= tempDamage;
         }
     }
-
     private void showDamage(int slot, int damage)
     {
-        Vector3 offset = new Vector3(-0.05f, 0.25f, 0);
         GameObject start = ST.getCard(slot);
         Debug.Log(start.transform.position);
         GameObject currDamage;
         currDamage = Instantiate(damageText, start.transform.position, new Quaternion(0f, 0f, 0f, 0f));
-        //currDamage.transform.position = ST.getCard(slot).transform.position + offset;
         currDamage.GetComponent<TextMesh>().text = $"{damage}";
     }
 }
