@@ -171,8 +171,10 @@ MonoBehaviour:
   mazeGenerator: {fileID: 273264912}
   MazeCellPrefab: {fileID: 8602279016520657798, guid: 33235dd82aa4f6c489050a49750d3fc8, type: 3}
   navMeshSurface: {fileID: 833767486}
-  coinProbability: 1
-  probabilityIncrease: 0.05
+  coinSpawnProbability: 0.1
+  coinProbabilityIncrease: 0.05
+  cardSpawnProbability: 0.1
+  cardProbabilityIncrease: 0.05
   CellSize: 1
 --- !u!114 &273264912
 MonoBehaviour:
@@ -235,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinCounterText: {fileID: 0}
+  cardCounterText: {fileID: 0}
 --- !u!1001 &702822046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,10 +246,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1066058419}
     m_Modifications:
-    - target: {fileID: 133380122904507145, guid: c98b0439910cefb4d8c1f31c9792378c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6049120289669516044, guid: c98b0439910cefb4d8c1f31c9792378c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

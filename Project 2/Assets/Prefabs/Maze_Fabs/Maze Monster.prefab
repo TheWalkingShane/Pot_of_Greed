@@ -757,7 +757,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6049120289669516044}
   - component: {fileID: 133380122904507145}
-  - component: {fileID: 4265346455604858065}
   m_Layer: 0
   m_Name: Maze Monster
   m_TagString: Untagged
@@ -813,18 +812,6 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
---- !u!114 &4265346455604858065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6959074844775351991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09369ad1ca15cb545a384778cef55050, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7557227987308365798
 GameObject:
   m_ObjectHideFlags: 0

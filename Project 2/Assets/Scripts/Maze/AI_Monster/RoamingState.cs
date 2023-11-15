@@ -8,7 +8,7 @@ public class RoamingState : IMonsterState
     private readonly NavMeshAgent agent;
     private readonly Transform monster;
 
-    public float roamingspeed;
+    private float roamingspeed = 4f;
 
     public RoamingState(NavMeshAgent agent, Transform monster)
     {
@@ -40,7 +40,7 @@ public class ChasingState : IMonsterState
     private readonly Transform monster;
     private readonly Transform player;
     
-    public float roamingspeed; // defualt roaming speed variable 
+    public float roamingspeed = 4f; // defualt roaming speed variable 
 
     public ChasingState(NavMeshAgent agent, Transform monster, Transform player)
     {
