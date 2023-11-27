@@ -9,22 +9,33 @@ public class MonsterController : MonoBehaviour
     private NavMeshAgent agent;
 
     // References to state instances
-    private RoamingState roamingState;
-    private ChasingState chasingState;
-    private IdleState idleState;
+    [SerializeField]
+    private static RoamingState roamingState;
+    private static ChasingState chasingState;
+    private static IdleState idleState;
 
     void Awake()
     {
-        Transform playerTransform = null; // change to player
+		GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         
-        agent = GetComponent<NavMeshAgent>();
-        // Initialize states with required references
-        roamingState = new RoamingState(agent, transform);
-        chasingState = new ChasingState(agent, transform, playerTransform); // playerTransform needs to be defined
-        idleState = new IdleState(agent);
+		if(playerObject != null)
+		{
+			agent = GetComponent<NavMeshAgent>(); // Initialize states with required references
+			if (agent != null && agent.isOnNavMesh)
+			{
+				Transform playerTransform = playerObject.transform;
 
-        // Start in idle state
-        TransitionToState(idleState);
+				roamingState = new RoamingState(agent, transform);
+				chasingState = new ChasingState(agent, transform, playerTransform); // playerTransform needs to be defined
+				idleState = new IdleState(agent);
+
+				TransitionToState(roamingState);
+			}
+		}
+		else
+		{
+        	Debug.LogError("Player not found!");
+    	}
     }
 
     void Update()
@@ -38,12 +49,18 @@ public class MonsterController : MonoBehaviour
         currentState = newState;
         currentState.OnEnterState();
     }
-
-    // Call this method to transition to chasing
     public void StartChasing()
     {
         TransitionToState(chasingState);
     }
+    
+    public void StartRoaming()
+    {
+	    TransitionToState(roamingState);
+    }
 
-    // ... Add other methods as needed for state transitions
+    public void StartIdle()
+    {
+	    TransitionToState(idleState);
+    }
 }
