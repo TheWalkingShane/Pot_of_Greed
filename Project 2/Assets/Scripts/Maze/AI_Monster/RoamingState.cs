@@ -12,7 +12,7 @@ public class RoamingState : IMonsterState
     private readonly float detectionRange = 10f;
     private bool playerDetected;
 
-    public RoamingState(NavMeshAgent agent, Transform monster)
+    public RoamingState(NavMeshAgent agent, Transform monster) // sets up variables 
     {
         this.agent = agent;
         this.monster = monster;
@@ -27,12 +27,12 @@ public class RoamingState : IMonsterState
 
     public void OnUpdateState()
     {
-        if (!playerDetected)
+        if (!playerDetected) // if player is not detected 
         {
-            if (PlayerIsDetected())
+            if (PlayerIsDetected()) // if player is detected switch to chasing state
             {
                 playerDetected = true;
-                // switch to chasing state
+                // find a way to switch to chasing state
             }
             else if (ReachedDestination()) // If reached destination, select a new random point
             {
@@ -44,6 +44,7 @@ public class RoamingState : IMonsterState
     public void OnExitState()
     {
         // Cleanup if needed
+        // set up everything back to normal
         playerDetected = false;
     }
     
@@ -55,6 +56,7 @@ public class RoamingState : IMonsterState
         agent.SetDestination(randomPos); // Setting the agent's destination to the random position
     }
     
+    // checks if the destination is reached for the monster
     private bool ReachedDestination()
     {
         if (!agent.pathPending)
@@ -72,7 +74,7 @@ public class RoamingState : IMonsterState
     
     private bool PlayerIsDetected()
     {
-        // Your logic to detect the player within a certain range
+        // Implement logic to detect the player within a certain range
         if (Vector3.Distance(monster.position, PlayerPosition()) <= detectionRange)
         {
             return true; // Player detected within the detection range
@@ -83,12 +85,13 @@ public class RoamingState : IMonsterState
     private Vector3 PlayerPosition()
     {
         // Gets the player's position
+        // suggestion from ChatGPT but doesn't work for me:
         // return GameManager.Instance.GetPlayerPosition();
-        return Vector3.zero;
+        return Vector3.zero; // default variable for now
     }
 
     
-    // Helper method to get a random point on the NavMesh within a given radius
+    // Method to get a random point on the NavMesh within a given radius
     private Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     {
         Vector3 randDirection = Random.insideUnitSphere * dist;
@@ -129,8 +132,8 @@ public class ChasingState : IMonsterState
         if (player != null)
         {
             agent.SetDestination(player.position);
-            // You can add additional logic here, like detecting if the player is out of sight
-            // and transitioning back to roaming if necessary
+            // add detecting if the player is out of sight and transitioning back to roaming if necessary
+            // this needs to be done, forgot to implement 
         }
     }
 
@@ -142,6 +145,7 @@ public class ChasingState : IMonsterState
     }
 }
 
+// idle state was working on and needs to be changed, didn't finish
 public class IdleState : IMonsterState
 {
     private readonly NavMeshAgent agent;
@@ -165,13 +169,13 @@ public class IdleState : IMonsterState
     {
         if (isIdling)
         {
-            idleTimer += Time.deltaTime;
+            idleTimer += Time.deltaTime; // adds to timer 
 
             if (idleTimer >= idleDuration)
             {
                 isIdling = false;
                 agent.isStopped = false; // Resume movement
-                // Transition to another state (e.g., roaming or chasing)
+                // Transition to another state
             }
         }
     }
@@ -179,7 +183,7 @@ public class IdleState : IMonsterState
     public void OnExitState()
     {
         // Clean up or reset any variables if needed when exiting the state
-        isIdling = false;
-        idleTimer = 0f;
+        isIdling = false; // resets idle
+        idleTimer = 0f; // resets timer
     }
 }

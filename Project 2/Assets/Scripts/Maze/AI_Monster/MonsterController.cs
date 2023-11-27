@@ -16,9 +16,9 @@ public class MonsterController : MonoBehaviour
 
     void Awake()
     {
-		GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+		GameObject playerObject = GameObject.FindGameObjectWithTag("Player"); // sets the player object 
         
-		if(playerObject != null)
+		if(playerObject != null) // sets up to get agents and states
 		{
 			agent = GetComponent<NavMeshAgent>(); // Initialize states with required references
 			if (agent != null && agent.isOnNavMesh)
@@ -29,7 +29,7 @@ public class MonsterController : MonoBehaviour
 				chasingState = new ChasingState(agent, transform, playerTransform); // playerTransform needs to be defined
 				idleState = new IdleState(agent);
 
-				TransitionToState(roamingState);
+				TransitionToState(roamingState); // originally was set to idle state but changed to roaming for testing
 			}
 		}
 		else
@@ -40,26 +40,27 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
-        currentState?.OnUpdateState();
+        currentState?.OnUpdateState(); // updates to the current state
     }
 
-    public void TransitionToState(IMonsterState newState)
+    // changes and enters to a new state 
+    public void TransitionToState(IMonsterState newState) 
     {
         currentState?.OnExitState();
         currentState = newState;
         currentState.OnEnterState();
     }
-    public void StartChasing()
+    public void StartChasing() // sets up for chasing state
     {
         TransitionToState(chasingState);
     }
     
-    public void StartRoaming()
+    public void StartRoaming() // sets up for roaming state
     {
 	    TransitionToState(roamingState);
     }
 
-    public void StartIdle()
+    public void StartIdle() // sets up for idle state
     {
 	    TransitionToState(idleState);
     }
