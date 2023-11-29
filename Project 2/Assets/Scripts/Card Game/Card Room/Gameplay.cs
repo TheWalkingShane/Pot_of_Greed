@@ -24,6 +24,7 @@ public class Gameplay : MonoBehaviour
     private bool ePressed = false;
     public TextMeshProUGUI health;
     public TextMeshProUGUI eHealth;
+    public GameObject damageText;
     
     public static event Action<GameState> OnGameStateChanged;
     private void Awake()
@@ -49,48 +50,15 @@ public class Gameplay : MonoBehaviour
             case GameState.PlayerAttack:
                 if (ST.isTaken(0))
                 {
-                    if (ST.isTaken(3))
-                    {
-                        ST.getCard(3).GetComponent<CardInfo>().health -= ST.getCard(0).GetComponent<CardInfo>().damage;
-                        if (ST.getCard(3).GetComponent<CardInfo>().health <= 0)
-                        {
-                            ST.emptySlot(3);
-                        }
-                    }
-                    else
-                    {
-                        this.enemyHealth -= ST.getCard(0).GetComponent<CardInfo>().damage;
-                    }
+                    cardAttack(0,3, true);
                 };
                 if (ST.isTaken(1))
                 {
-                    if (ST.isTaken(4))
-                    {
-                        ST.getCard(4).GetComponent<CardInfo>().health -= ST.getCard(1).GetComponent<CardInfo>().damage;
-                        if (ST.getCard(4).GetComponent<CardInfo>().health <= 0)
-                        {
-                            ST.emptySlot(4);
-                        }
-                    }
-                    else
-                    {
-                        this.enemyHealth -= ST.getCard(1).GetComponent<CardInfo>().damage;
-                    }
+                    cardAttack(1,4, true);
                 };
                 if (ST.isTaken(2))
                 {
-                    if (ST.isTaken(5))
-                    {
-                        ST.getCard(5).GetComponent<CardInfo>().health -= ST.getCard(2).GetComponent<CardInfo>().damage;
-                        if (ST.getCard(5).GetComponent<CardInfo>().health <= 0)
-                        {
-                            ST.emptySlot(5);
-                        }
-                    }
-                    else
-                    {
-                        this.enemyHealth -= ST.getCard(2).GetComponent<CardInfo>().damage;
-                    }
+                    cardAttack(2,5, true);
                 };
                 if (this.enemyHealth <= 0)
                 {
@@ -99,15 +67,14 @@ public class Gameplay : MonoBehaviour
                     UpdateGameState(GameState.Victory);
                     break;
                 }
-                
                 updateHealth();
                 Debug.Log("Moving to EnemyTurn");
-                StartCoroutine(turnWait(GameState.EnemyTurn));
+                StartCoroutine(turnWait(GameState.EnemyTurn, 2f));
                 break;
             case GameState.EnemyTurn:
                 if (!ST.isEslotsEmpty())
                 {
-                    StartCoroutine(turnWait(GameState.EnemyAttack));
+                    StartCoroutine(turnWait(GameState.EnemyAttack, 2f));
                     break;
                 }
                 int sel1 = Random.Range(1, 3); //Decides basekit or specialty
@@ -119,10 +86,10 @@ public class Gameplay : MonoBehaviour
                     {
                         sel2 = Random.Range(3, 6);
                     }
-                    currCard = Instantiate(card, storage.transform);
+                    currCard = Instantiate(card, Eslots[sel2 - 3].transform.GetChild(5).position, Quaternion.Euler(0,0,0));
                     currCard.GetComponent<CardInfo>().setCard(CLU.cardList[sel3].health, CLU.cardList[sel3].damage);
-                    currCard.transform.position = Eslots[sel2 - 3].transform.GetChild(5).position;
-                    currCard.transform.rotation = Quaternion.Euler(0,0,0);
+                    //currCard.transform.position = Eslots[sel2 - 3].transform.GetChild(5).position;
+                    //currCard.transform.rotation = Quaternion.Euler(0,0,0);
                     currCard.GetComponent<MeshRenderer>().material.mainTexture = CLU.cardList[sel3].cardImage; //Use card texture
                     ST.fillSlot(sel2, currCard);
                 }
@@ -133,62 +100,29 @@ public class Gameplay : MonoBehaviour
                     {
                         sel2 = Random.Range(3, 6);
                     }
-                    currCard = Instantiate(card, storage.transform);
+                    currCard = Instantiate(card, Eslots[sel2 - 3].transform.GetChild(5).position, Quaternion.Euler(0,0,0));
                     currCard.GetComponent<CardInfo>().setCard(CLU.specialCardList[sel3].health, CLU.specialCardList[sel3].damage);
-                    currCard.transform.position = Eslots[sel2 - 3].transform.GetChild(5).position;
-                    currCard.transform.rotation = Quaternion.Euler(0,0,0);
+                    //currCard.transform.position = Eslots[sel2 - 3].transform.GetChild(5).position;
+                    //currCard.transform.rotation = Quaternion.Euler(0,0,0);
                     currCard.GetComponent<MeshRenderer>().material.mainTexture = CLU.specialCardList[sel3].cardImage; //Use card texture
                     ST.fillSlot(sel2, currCard);
                 }
                 
                 Debug.Log("EnemyAttack");
-                StartCoroutine(turnWait(GameState.EnemyAttack));
+                StartCoroutine(turnWait(GameState.EnemyAttack, 2f));
                 break;
             case GameState.EnemyAttack:
                 if (ST.isTaken(3))
                 {
-                    if (ST.isTaken(0))
-                    {
-                        ST.getCard(0).GetComponent<CardInfo>().health -= ST.getCard(3).GetComponent<CardInfo>().damage;
-                        if (ST.getCard(0).GetComponent<CardInfo>().health <= 0)
-                        {
-                            ST.emptySlot(0);
-                        }
-                    }
-                    else
-                    {
-                        this.playerHealth -= ST.getCard(3).GetComponent<CardInfo>().damage;
-                    }
+                    cardAttack(3, 0, false);
                 };
                 if (ST.isTaken(4))
                 {
-                    if (ST.isTaken(1))
-                    {
-                        ST.getCard(1).GetComponent<CardInfo>().health -= ST.getCard(4).GetComponent<CardInfo>().damage;
-                        if (ST.getCard(1).GetComponent<CardInfo>().health <= 0)
-                        {
-                            ST.emptySlot(1);
-                        }
-                    }
-                    else
-                    {
-                        this.playerHealth -= ST.getCard(4).GetComponent<CardInfo>().damage;
-                    }
+                    cardAttack(4, 1, false);
                 };
                 if (ST.isTaken(5))
                 {
-                    if (ST.isTaken(2))
-                    {
-                        ST.getCard(2).GetComponent<CardInfo>().health -= ST.getCard(5).GetComponent<CardInfo>().damage;
-                        if (ST.getCard(2).GetComponent<CardInfo>().health <= 0)
-                        {
-                            ST.emptySlot(2);
-                        }
-                    }
-                    else
-                    {
-                        this.playerHealth -= ST.getCard(5).GetComponent<CardInfo>().damage;
-                    }
+                    cardAttack(5, 2,false);
                 };
                 if (this.playerHealth <= 0)
                 {
@@ -200,7 +134,7 @@ public class Gameplay : MonoBehaviour
                 
                 updateHealth();
                 Debug.Log("Moving to PlayerTurn");
-                StartCoroutine(turnWait(GameState.PlayerTurn));
+                StartCoroutine(turnWait(GameState.PlayerTurn, 1f));
                 break;
             case GameState.Lose:
                 //Play animation (possibly) and end game / go back to main menu
@@ -231,8 +165,12 @@ public class Gameplay : MonoBehaviour
     {
         Debug.Log("Waiting...");
         
-        while(!ePressed && turns > 0)
+        while(!ePressed /*&& turns > 0*/)
         {
+            if (turns <= 0)
+            {
+                placement.cardInput(false);
+            }
             yield return null;
         }
         placement.cardInput(false);
@@ -242,9 +180,9 @@ public class Gameplay : MonoBehaviour
         Debug.Log("Player Attack");
         UpdateGameState(GameState.PlayerAttack);
     }
-    private IEnumerator turnWait(GameState newState) {
+    private IEnumerator turnWait(GameState newState, float wait) {
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(wait);
         UpdateGameState(newState);
     }
 
@@ -252,6 +190,41 @@ public class Gameplay : MonoBehaviour
     {
         health.text = $"Player HP: {this.playerHealth}";
         eHealth.text = $"Enemy HP: {this.enemyHealth}";
+    }
+
+    private void cardAttack(int offensiveSlot, int defensiveSlot, bool playerTurn)
+    {
+        GameObject off = ST.getCard(offensiveSlot);
+        int tempDamage = off.GetComponent<CardInfo>().damage;
+        if (tempDamage <= 0)
+        {
+            return;
+        }
+        if (ST.isTaken(defensiveSlot))
+        {
+            ST.getCard(defensiveSlot).GetComponent<CardInfo>().dealDamage(tempDamage);
+            showDamage(defensiveSlot, tempDamage);
+            if (ST.getCard(defensiveSlot).GetComponent<CardInfo>().health <= 0)
+            {
+                ST.emptySlot(defensiveSlot);
+            }
+        }
+        else if(playerTurn)
+        {
+            this.enemyHealth -= tempDamage;
+        }
+        else
+        {
+            this.playerHealth -= tempDamage;
+        }
+    }
+    private void showDamage(int slot, int damage)
+    {
+        GameObject start = ST.getCard(slot);
+        Debug.Log(start.transform.position);
+        GameObject currDamage;
+        currDamage = Instantiate(damageText, start.transform.position, new Quaternion(0f, 0f, 0f, 0f));
+        currDamage.GetComponent<TextMesh>().text = $"{damage}";
     }
 }
 

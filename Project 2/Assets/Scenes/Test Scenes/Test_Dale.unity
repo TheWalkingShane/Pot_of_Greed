@@ -1336,8 +1336,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Enemy HP: 10'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e60f1ab9552c72a48ab986df0817ac05, type: 2}
+  m_sharedMaterial: {fileID: 4296892915664463746, guid: e60f1ab9552c72a48ab986df0817ac05, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1361,8 +1361,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1558,6 +1558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8a3bee67d912447aa62d9df3532ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 1854843652}
   State: 2
   placement: {fileID: 1926305522}
   ST: {fileID: 1926305519}
@@ -1570,6 +1571,7 @@ MonoBehaviour:
   - {fileID: 382775727}
   health: {fileID: 1996312667}
   eHealth: {fileID: 1457360092}
+  damageText: {fileID: 5424194753244334586, guid: 5b2e663f20d23764b8be11467085cd22, type: 3}
 --- !u!1001 &1680351419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2300,8 +2302,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Player HP: 10'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e60f1ab9552c72a48ab986df0817ac05, type: 2}
+  m_sharedMaterial: {fileID: 4296892915664463746, guid: e60f1ab9552c72a48ab986df0817ac05, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2325,8 +2327,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
