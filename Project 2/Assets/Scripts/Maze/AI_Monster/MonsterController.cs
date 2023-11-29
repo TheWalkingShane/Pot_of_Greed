@@ -1,67 +1,86 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MonsterController : MonoBehaviour
 {
-    private IMonsterState currentState;
-    private NavMeshAgent agent;
+	private IMonsterState currentState;
+	public NavMeshAgent agent;
 
-    // References to state instances
-    [SerializeField]
-    private static RoamingState roamingState;
-    private static ChasingState chasingState;
-    private static IdleState idleState;
+	// States
+	public RoamingState roamingState;
+	public ChasingState chasingState;
 
-    void Awake()
-    {
-		GameObject playerObject = GameObject.FindGameObjectWithTag("Player"); // sets the player object 
-        
-		if(playerObject != null) // sets up to get agents and states
+	// You'll add more states here later
+
+	// Parameters for the RoamingState
+	[Tooltip("RoamingState")]
+	private float roamRadius = 10f;
+	[SerializeField] private float waitTimeBetweenRoam = 5f;
+	[SerializeField] public float viewDistance = 15f; // How far the monster can see
+	[SerializeField] public float viewAngle = 90f; // The field of view angle for line of sight
+	[SerializeField] private LayerMask lineOfSightMask; // Layer mask to determine what objects block line of sight
+	
+	[Header("ChasingState")]
+	[SerializeField] public float chaseSpeed = 1.7f;
+	[SerializeField] public float reactionTime = 0.0f;
+	[SerializeField] public float catchRadius = 1f ;
+	[SerializeField]public float viewRange = 7f;
+	[SerializeField]private float fieldOfView = 180f;
+	[SerializeField]private LayerMask obstacleMask;
+	
+	public Transform playerTransform;
+
+	void Awake()
+	{
+		agent = GetComponent<NavMeshAgent>();
+	}
+
+	void Start()
+	{
+		Invoke("DelayedFunction", 5f);
+		
+		// Create and enter the RoamingState
+		roamingState = new RoamingState(agent, transform, playerTransform, roamRadius, waitTimeBetweenRoam, lineOfSightMask, viewDistance, viewAngle);
+		chasingState = new ChasingState(agent, transform, playerTransform, chaseSpeed, reactionTime, catchRadius, viewRange, fieldOfView, obstacleMask);
+		// Set your desired chase speed and reaction time
+		TransitionToState(roamingState);
+		//TransitionToState(new IdleState(this, 5f)); // Example: Idle for 5 seconds
+
+	}
+	private void DelayedFunction()
+	{
+		// Code to execute after the 5-second delay
+	}
+	void Update()
+	{
+		currentState?.OnUpdateState();
+	}
+
+	public void TransitionToState(IMonsterState newState)
+	{
+		currentState?.OnExitState();
+		currentState = newState;
+		currentState.OnEnterState();
+	}
+	
+	// In the MonsterController
+	public void StartChasing()
+	{
+		TransitionToState(chasingState);
+	}
+	public void TransitionToRoaming()
+	{
+		// Assume roamingState is already initialized
+		TransitionToState(roamingState);
+	}
+
+	void OnDrawGizmos()
+	{
+		if (currentState is ChasingState chasingState)
 		{
-			agent = GetComponent<NavMeshAgent>(); // Initialize states with required references
-			if (agent != null && agent.isOnNavMesh)
-			{
-				Transform playerTransform = playerObject.transform;
-
-				roamingState = new RoamingState(agent, transform);
-				chasingState = new ChasingState(agent, transform, playerTransform); // playerTransform needs to be defined
-				idleState = new IdleState(agent);
-
-				TransitionToState(roamingState); // originally was set to idle state but changed to roaming for testing
-			}
+			Gizmos.color = Color.blue;
+			Gizmos.DrawWireSphere(transform.position, chasingState.CatchRadius);
 		}
-		else
-		{
-        	Debug.LogError("Player not found!");
-    	}
-    }
-
-    void Update()
-    {
-        currentState?.OnUpdateState(); // updates to the current state
-    }
-
-    // changes and enters to a new state 
-    public void TransitionToState(IMonsterState newState) 
-    {
-        currentState?.OnExitState();
-        currentState = newState;
-        currentState.OnEnterState();
-    }
-    public void StartChasing() // sets up for chasing state
-    {
-        TransitionToState(chasingState);
-    }
-    
-    public void StartRoaming() // sets up for roaming state
-    {
-	    TransitionToState(roamingState);
-    }
-
-    public void StartIdle() // sets up for idle state
-    {
-	    TransitionToState(idleState);
-    }
+	}
 }
+
