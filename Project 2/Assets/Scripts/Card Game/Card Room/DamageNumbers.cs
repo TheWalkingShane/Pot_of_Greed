@@ -13,6 +13,6 @@ public class DamageNumbers : MonoBehaviour
 
     private void Update()
     {
-        gameObject.transform.position += Vector3.up / 100;
+        gameObject.transform.position += Vector3.up / 1000;
     }
 }
