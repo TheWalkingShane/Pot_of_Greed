@@ -47,13 +47,13 @@ public class GameManager : MonoBehaviour
     public void CollectCoin()
     {
         coinsCollected++;
-        Debug.Log("Current Coin Count" + coinsCollected);
+       // Debug.Log("Current Coin Count" + coinsCollected);
         UpdateCoinCounterText();
     }
     public void CollectCard()
     {
         cardsCollected++;
-        Debug.Log("Current Card Count" + cardsCollected);
+        //Debug.Log("Current Card Count" + cardsCollected);
         UpdateCardCounterText();
     }
     //===================================================================

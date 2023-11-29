@@ -34,7 +34,7 @@ public class RoamingState : IMonsterState
 
     public void OnEnterState()
     {
-        agent.speed = 1.35f; // Set the roaming speed
+        agent.speed = 1.15f; // Set the roaming speed
         timeSinceLastRoam = waitTimeBetweenRoam; // Initiate the first roam immediately
     }
 

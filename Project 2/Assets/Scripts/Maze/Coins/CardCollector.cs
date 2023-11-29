@@ -9,7 +9,7 @@ public class CardCollector : MonoBehaviour
         // Assuming the player has a tag of "Player"
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Collected Card!");
+           // Debug.Log("Collected Card!");
             // Tell the GameManager to increment the collected card count
             GameManager.Instance.CollectCard();
 

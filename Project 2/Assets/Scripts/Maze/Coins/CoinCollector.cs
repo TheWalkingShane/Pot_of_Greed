@@ -9,7 +9,7 @@ public class CoinCollector : MonoBehaviour
         // Assuming the player has a tag of "Player"
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Collected Coin!");
+          //  Debug.Log("Collected Coin!");
             // Tell the GameManager to increment the collected coin count
             GameManager.Instance.CollectCoin();
 
