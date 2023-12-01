@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -29,6 +30,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
 
     public MovementState state;
+
+    [Header("Stamina")]
+    public Slider staminaBar;
+    public float stamina;
+    private float maxStamina;
+    public float runCost;
+    private bool staminaOn = false;
     
     public enum MovementState
     {
@@ -41,7 +49,11 @@ public class PlayerMovement : MonoBehaviour
     {
         // Gets the Rigidbody and freezes the position
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true; 
+        rb.freezeRotation = true;
+
+        // setting up variable for stamina 
+        maxStamina = stamina;
+        staminaBar.maxValue = maxStamina;
     }
 
     // Update is called once per frame
@@ -53,6 +65,21 @@ public class PlayerMovement : MonoBehaviour
         Inputs();
         SpeedControl();
         StateHandler();
+        
+        // Tried to solve problem with boolean but got same result of stamina not starting right away when game starts
+        /*if (staminaOn)
+        {
+            moveSpeed = sprintSpeed;
+            DecreaseEnergy();
+        }
+        else
+        {
+            moveSpeed = walkSpeed;
+            IncreaseEnergy();
+        }
+        
+        staminaBar.value = stamina;
+        */
         
         // Handles if their is drag
         if (grounded)
@@ -85,14 +112,32 @@ public class PlayerMovement : MonoBehaviour
         if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
+            
+            // checks if the stamina is less than zero, then go to walking speed
+            // else sprint and decrease energy
+            if (stamina < 0)
+            {
+                //staminaOn = false;
+                moveSpeed = walkSpeed;
+            }
+            else
+            {
+                //staminaOn = true;
+                moveSpeed = sprintSpeed;
+                DecreaseEnergy();
+            }
+            
         }
         // When walking
         else if (grounded)
         {
             state = MovementState.walking;
+            //staminaOn = false;
             moveSpeed = walkSpeed;
+            IncreaseEnergy();
         }
+
+        staminaBar.value = stamina;
     }
 
     private void MovePlayer()
@@ -116,5 +161,20 @@ public class PlayerMovement : MonoBehaviour
             Vector3 limitVelocity = flatVelocity.normalized * moveSpeed;
             rb.velocity = new Vector3(limitVelocity.x, rb.velocity.y, limitVelocity.z);
         }
+    }
+
+    // function to decrease the stamina 
+    private void DecreaseEnergy()
+    {
+        if (stamina != 0)
+        {
+            stamina -= runCost * Time.deltaTime;
+        }
+    }
+    
+    // function to increase the stamina
+    private void IncreaseEnergy()
+    { 
+        stamina += runCost * Time.deltaTime;
     }
 }
