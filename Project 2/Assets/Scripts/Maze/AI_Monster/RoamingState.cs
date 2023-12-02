@@ -221,7 +221,7 @@ public class IdleState : IMonsterState
     private MonsterController monsterController;
     private float idleDuration;
     private float idleTimer;
-    private int lastPrintedTime = -1;
+   // private int lastPrintedTime = -1;
 
     public IdleState(MonsterController monsterController, float idleDuration)
     {

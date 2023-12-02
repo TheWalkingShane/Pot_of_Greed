@@ -25,7 +25,7 @@ public class MazeRender : MonoBehaviour
     {
         int AllCoinCount = 0; // to record how many coins spawned
         int AllCardCount = 0; // to record how many cards spawned
-
+        int CardSpawnMax = 7; // set card spawn max to be 7 or less
         
         //get our mazeGenerator script to make us a make
         MazeCell[,] maze = mazeGenerator.GetMaze();
@@ -91,14 +91,17 @@ public class MazeRender : MonoBehaviour
                     coinSpawnProbability += coinProbabilityIncrease; // Increase coin probability
                 }
 
-                if (card)
+                if (AllCardCount != CardSpawnMax) //checks to see if the max number of cards is less than 7
                 {
-                    AllCardCount++;
-                    cardSpawnProbability = 0.1f; // Reset the card probability
-                }
-                else
-                {
-                    cardSpawnProbability += cardProbabilityIncrease; // Increase card probability
+                    if (card)
+                    {
+                        AllCardCount++;
+                        cardSpawnProbability = 0.1f; // Reset the card probability
+                    }
+                    else
+                    {
+                        cardSpawnProbability += cardProbabilityIncrease; // Increase card probability
+                    }
                 }
                 //Debug.Log($"Cell {coinProbability}: Coin enabled = {coin}"); // testing the coin probability
 
