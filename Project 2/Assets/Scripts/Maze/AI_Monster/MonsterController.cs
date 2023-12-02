@@ -5,10 +5,14 @@ public class MonsterController : MonoBehaviour
 {
 	private IMonsterState currentState;
 	public NavMeshAgent agent;
+	// Singleton implementation for MonsterController
+	public static MonsterController Instance { get; private set; }
 
 	// States
 	public RoamingState roamingState;
 	public ChasingState chasingState;
+	public IdleState idlestate;
+	private bool allowStateChange = true;
 
 	// You'll add more states here later
 
@@ -33,24 +37,29 @@ public class MonsterController : MonoBehaviour
 	void Awake()
 	{
 		agent = GetComponent<NavMeshAgent>();
+		
+		if (Instance == null)
+		{
+			Instance = this;
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
+		
 	}
 
 	void Start()
 	{
-		Invoke("DelayedFunction", 5f);
-		
 		// Create and enter the RoamingState
 		roamingState = new RoamingState(agent, transform, playerTransform, roamRadius, waitTimeBetweenRoam, lineOfSightMask, viewDistance, viewAngle);
 		chasingState = new ChasingState(agent, transform, playerTransform, chaseSpeed, reactionTime, catchRadius, viewRange, fieldOfView, obstacleMask);
 		// Set your desired chase speed and reaction time
 		TransitionToState(roamingState);
-		//TransitionToState(new IdleState(this, 5f)); // Example: Idle for 5 seconds
+
 
 	}
-	private void DelayedFunction()
-	{
-		// Code to execute after the 5-second delay
-	}
+	//===================================================================
 	void Update()
 	{
 		currentState?.OnUpdateState();
@@ -62,8 +71,12 @@ public class MonsterController : MonoBehaviour
 		currentState = newState;
 		currentState.OnEnterState();
 	}
+	//===================================================================
 	
-	// In the MonsterController
+	
+	
+	
+	//===================================================================
 	public void StartChasing()
 	{
 		TransitionToState(chasingState);
@@ -72,6 +85,40 @@ public class MonsterController : MonoBehaviour
 	{
 		// Assume roamingState is already initialized
 		TransitionToState(roamingState);
+	}
+
+	public void EnterIdleState()
+	{
+		if (allowStateChange)
+		{
+			// Enter IdleState logic
+			TransitionToState(new IdleState(this, 5f));
+		}
+		allowStateChange = false; // Prevent further state changes, this AllowStateChange is at the bottom
+	}
+	//===================================================================
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void AllowStateChange()
+	{
+		allowStateChange = true;
 	}
 
 	void OnDrawGizmos()
