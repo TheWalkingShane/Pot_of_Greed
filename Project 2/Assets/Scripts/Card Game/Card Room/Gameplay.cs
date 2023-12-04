@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,8 +12,9 @@ public class Gameplay : MonoBehaviour
 {
     public static Gameplay Instance;
     public GameState State;
-    private int playerHealth = 10;
+    private int playerHealth = 1;
     private int enemyHealth = 10;
+    public GameObject piggy;
     private int turns = 2;
     public CardPlacement placement;
     public SlotTracking ST;
@@ -25,7 +27,21 @@ public class Gameplay : MonoBehaviour
     public TextMeshProUGUI health;
     public TextMeshProUGUI eHealth;
     public GameObject damageText;
-    
+    private Vector3 slideBack = new Vector3(0,-0.0249998569f,7.5f);
+    private float smooth = 0.65f;
+    Vector3 newPosition;
+    private bool lose = false;
+    public Transform dCam;
+    public Transform dStart;
+    public GameObject cam;
+    public CameraSwitch CS;
+    private bool slideDone = false;
+    private bool lunge = false;
+    private AudioSource monsterSounds;
+    public GameObject healthUI;
+    public AudioSource musicManager;
+    public AudioClip whispers;
+
     public static event Action<GameState> OnGameStateChanged;
     private void Awake()
     {
@@ -35,6 +51,8 @@ public class Gameplay : MonoBehaviour
     private void Start()
     {
         UpdateGameState(GameState.PlayerTurn);
+        newPosition = new Vector3(0,-0.0249998569f,3);
+        monsterSounds = piggy.GetComponent<AudioSource>();
     }
 
     public void UpdateGameState(GameState newState)
@@ -138,6 +156,11 @@ public class Gameplay : MonoBehaviour
                 break;
             case GameState.Lose:
                 //Play animation (possibly) and end game / go back to main menu
+                lose = true;
+                StartCoroutine(deathAnim());
+                healthUI.SetActive(false);
+                musicManager.clip = whispers;
+                musicManager.Play();
                 break;
             case GameState.Victory:
                 //Go back to maze
@@ -145,7 +168,6 @@ public class Gameplay : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
-
         if (OnGameStateChanged != null) OnGameStateChanged(newState);
     }
 
@@ -154,6 +176,11 @@ public class Gameplay : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             ePressed = true;
+        }
+        endGameCheck();
+        if (lunge && piggy.transform.position.x >= 2.3f) 
+        {
+            piggy.transform.position += piggy.transform.right * Time.deltaTime * 22;
         }
     }
 
@@ -225,6 +252,37 @@ public class Gameplay : MonoBehaviour
         GameObject currDamage;
         currDamage = Instantiate(damageText, start.transform.position, new Quaternion(0f, 0f, 0f, 0f));
         currDamage.GetComponent<TextMesh>().text = $"{damage}";
+    }
+
+    public void endGameCheck()
+    {
+        if (piggy.transform.position.z >= 6.7f || slideDone)
+        {
+            slideDone = true;
+            return;
+        }
+        if (lose)
+        {
+            piggy.transform.position += new Vector3(0, 0, 1.2f) * Time.deltaTime;
+        }
+    }
+
+    private IEnumerator deathAnim()
+    {
+        float manWait = 0;
+        int rand = Random.Range(0, 11);
+        CS.disableCam();
+        yield return new WaitForSeconds(3f);
+        slideDone = true;
+        Debug.Log(rand);
+        yield return new WaitForSeconds(rand);
+        musicManager.Stop();
+        cam.transform.position = dCam.position;
+        cam.transform.rotation = dCam.rotation;
+        piggy.transform.position = dStart.transform.position;
+        piggy.transform.rotation = dStart.transform.rotation;
+        lunge = true;
+        monsterSounds.Play();
     }
 }
 

@@ -10,6 +10,7 @@ public class CameraSwitch : MonoBehaviour
     private float smooth = 7;
     private Vector3 newPosition;
     private Quaternion newRotation;
+    private bool disable = false;
 
 
     // Start is called before the first frame update
@@ -28,6 +29,10 @@ public class CameraSwitch : MonoBehaviour
 
     private void changePosition()
     {
+        if (disable)
+        {
+            return;
+        }
         Vector3 p1 = cam1.position;
         Quaternion r1 = cam1.rotation;
         Vector3 p2 = cam2.position;
@@ -48,5 +53,10 @@ public class CameraSwitch : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * smooth);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * smooth);
+    }
+
+    public void disableCam()
+    {
+        disable = true;
     }
 }
