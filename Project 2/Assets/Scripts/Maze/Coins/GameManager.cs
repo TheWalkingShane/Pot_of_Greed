@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+   // public static GameManager Instance { get; private set; }
+    public static GameManager Instance;
 
     public TextMeshProUGUI coinCounterText; // UI Text to display the coin counter.
     public TextMeshProUGUI cardCounterText; // UI Text to display the card counter.
@@ -104,6 +106,31 @@ public class GameManager : MonoBehaviour
     {
         totalCardsActive = total;
         UpdateCardCounterText();
+    }
+    //===================================================================
+    
+    
+    //===================================================================
+    
+                    //      [OBSERVER PATTERN]
+    public void HandleReturnToMaze()
+    {
+        // Re-enable state changes for the monster
+        MonsterController.Instance.AllowStateChange();
+
+        // Transition the monster back to RoamingState
+        MonsterController.Instance.TransitionToRoaming();
+    }
+  
+    public void ChangeToCaughtScene()
+    {
+        // Handle any pre-scene change logic here
+        // For example, set the monster to an idle state
+        SceneManager.LoadScene("Test_Dale");
+        MonsterController.Instance.EnterIdleState();
+
+        // Load the new scene where the player is caught
+        //SceneManager.LoadScene("Test_Dale");
     }
     //===================================================================
 }

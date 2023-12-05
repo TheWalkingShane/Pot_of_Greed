@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class RoamingState : IMonsterState
 {
@@ -160,9 +160,10 @@ public class ChasingState : IMonsterState
                 if (Vector3.Distance(monsterTransform.position, playerTransform.position) <= catchRadius)
                 {
                     // Transition to IdleState
-                    float idleDuration = 5f; // Idle for 5 seconds
-                    IMonsterState idleState = new IdleState(monsterTransform.GetComponent<MonsterController>(), idleDuration);
-                    monsterTransform.GetComponent<MonsterController>().TransitionToState(idleState);
+                    GameManager.Instance.ChangeToCaughtScene();
+                   // float idleDuration = 5f; // Idle for 5 seconds
+                   // IMonsterState idleState = new IdleState(monsterTransform.GetComponent<MonsterController>(), idleDuration);
+                   // monsterTransform.GetComponent<MonsterController>().TransitionToState(idleState);
                 }
             }
             else
@@ -220,7 +221,7 @@ public class IdleState : IMonsterState
     private MonsterController monsterController;
     private float idleDuration;
     private float idleTimer;
-    private int lastPrintedTime = -1;
+   // private int lastPrintedTime = -1;
 
     public IdleState(MonsterController monsterController, float idleDuration)
     {
@@ -230,15 +231,16 @@ public class IdleState : IMonsterState
 
     public void OnEnterState()
     {
-        idleTimer = idleDuration;
+       // idleTimer = idleDuration;
         monsterController.agent.isStopped = true; // Stop the monster's movement
-        Debug.Log("Entering Idle State. Countdown: " + Mathf.CeilToInt(idleTimer) + " seconds");
+        Debug.Log("Entering IdleState");
+        //Debug.Log("Entering Idle State. Countdown: " + Mathf.CeilToInt(idleTimer) + " seconds");
 
     }
 
     public void OnUpdateState()
     {
-        idleTimer -= Time.deltaTime;
+        /*idleTimer -= Time.deltaTime;
 
         // Print the countdown in whole seconds, only when it changes
         int remainingTime = Mathf.CeilToInt(idleTimer);
@@ -247,21 +249,19 @@ public class IdleState : IMonsterState
             Debug.Log("Idle State Countdown: " + remainingTime + " seconds remaining");
             lastPrintedTime = remainingTime;
         }
-
+        
         if (idleTimer <= 0)
         {
             monsterController.agent.isStopped = false; // Resume movement
             monsterController.TransitionToRoaming(); // Transition back to RoamingState
             Debug.Log("Exiting Idle State, transitioning to Roaming State.");
-        }
+        }*/
     }
 
     public void OnExitState()
     {
+        Debug.Log("Exiting IdleState");
         // Ensure the monster can move when exiting the idle state
         monsterController.agent.isStopped = false;
     }
 }
-
-
-
