@@ -12,7 +12,7 @@ public class Gameplay : MonoBehaviour
 {
     public static Gameplay Instance;
     public GameState State;
-    private int playerHealth = 1;
+    private int playerHealth = 10;
     private int enemyHealth = 10;
     public GameObject piggy;
     private int turns = 2;
