@@ -248,7 +248,6 @@ public class Gameplay : MonoBehaviour
     private void showDamage(int slot, int damage)
     {
         GameObject start = ST.getCard(slot);
-        Debug.Log(start.transform.position);
         GameObject currDamage;
         currDamage = Instantiate(damageText, start.transform.position, new Quaternion(0f, 0f, 0f, 0f));
         currDamage.GetComponent<TextMesh>().text = $"{damage}";

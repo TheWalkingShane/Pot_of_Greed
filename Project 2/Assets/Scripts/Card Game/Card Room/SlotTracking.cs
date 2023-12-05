@@ -37,7 +37,7 @@ public class SlotTracking : MonoBehaviour
     public void emptySlot(int slot)
     {
         slots[slot] = false;
-        Destroy(cards[slot]);
+        StartCoroutine(destroyCard(cards[slot]));
         cards[slot] = null;
     }
 
@@ -51,5 +51,13 @@ public class SlotTracking : MonoBehaviour
         {
             return true;
         }
+    }
+
+    private IEnumerator destroyCard(GameObject card)
+    {
+        card.transform.GetChild(1).gameObject.SetActive(true);
+        card.transform.GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(3f);
+        Destroy(card);
     }
 }
