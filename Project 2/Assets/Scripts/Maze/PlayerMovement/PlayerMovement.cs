@@ -174,7 +174,10 @@ public class PlayerMovement : MonoBehaviour
     
     // function to increase the stamina
     private void IncreaseEnergy()
-    { 
-        stamina += runCost * Time.deltaTime;
+    {
+        if (stamina <= 100)
+        {
+            stamina += runCost * Time.deltaTime;
+        }
     }
 }
