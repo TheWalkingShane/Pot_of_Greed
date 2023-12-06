@@ -25,7 +25,7 @@ public class MazeRender : MonoBehaviour
     {
         int AllCoinCount = 0; // to record how many coins spawned
         int AllCardCount = 0; // to record how many cards spawned
-        int CardSpawnMax = 7; // set card spawn max to be 7 or less
+        int CardSpawnMax = 12; // set card spawn max to be 7 or less
         
         //get our mazeGenerator script to make us a make
         MazeCell[,] maze = mazeGenerator.GetMaze();
