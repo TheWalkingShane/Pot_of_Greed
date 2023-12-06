@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 6002393817904075530}
   - component: {fileID: 2209971248098800939}
   - component: {fileID: 1986727682719122445}
-  - component: {fileID: 6792588766851564573}
+  - component: {fileID: 7251068334737297245}
   m_Layer: 0
   m_Name: Card
   m_TagString: Card
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34be0390754854848af4da15d1a53ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6792588766851564573
+--- !u!114 &7251068334737297245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -356,14 +356,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1791839235030982230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1738109b01f042c4f8186e57df5fa697, type: 3}
+  m_Script: {fileID: 11500000, guid: 57d30a9069086464f8fa92427b497677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 50
   hoverSpeed: 1
   hoverAmplitude: 0.1
-  startColor: {r: 0.5377358, g: 0.2252545, b: 0.0076094554, a: 1}
-  endColor: {r: 0, g: 0.21021718, b: 0.7169812, a: 1}
+  startColor: {r: 0.5372549, g: 0.22352941, b: 0.007843138, a: 1}
+  endColor: {r: 0, g: 0.21176471, b: 0.7176471, a: 1}
 --- !u!1 &1908525465040755992
 GameObject:
   m_ObjectHideFlags: 0
