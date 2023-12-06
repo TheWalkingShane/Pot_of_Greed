@@ -1074,8 +1074,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9874a215dd60164eaed1dfc3d803899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeWidth: 12
-  mazeHeight: 12
+  mazeWidth: 10
+  mazeHeight: 10
   startX: 0
   startY: 0
 --- !u!4 &1394934726
