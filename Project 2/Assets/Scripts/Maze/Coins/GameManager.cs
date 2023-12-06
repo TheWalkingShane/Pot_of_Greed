@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         // Initialize your coins from the cells if necessary
         totalCoinsActive = FindObjectsOfType<CoinVisuals>().Length;
-        totalCardsActive = FindObjectsOfType<CoinVisuals>().Length;
+        totalCardsActive = FindObjectsOfType<CardVisuals>().Length;
         UpdateCoinCounterText();
         UpdateCardCounterText();
     }

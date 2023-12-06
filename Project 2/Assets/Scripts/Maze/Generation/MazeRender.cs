@@ -64,7 +64,7 @@ public class MazeRender : MonoBehaviour
                 }
                 
                 bool coin = UnityEngine.Random.value < coinSpawnProbability;
-                bool card = UnityEngine.Random.value < cardSpawnProbability;
+                bool card = UnityEngine.Random.value < cardSpawnProbability && AllCardCount < CardSpawnMax;
 
                 // If both a coin and a card are set to spawn, choose only one
                 if (coin && card)
