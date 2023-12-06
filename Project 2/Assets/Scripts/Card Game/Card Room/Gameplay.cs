@@ -38,9 +38,16 @@ public class Gameplay : MonoBehaviour
     private bool slideDone = false;
     private bool lunge = false;
     private AudioSource monsterSounds;
+    public AudioSource playerSounds;
+    public AudioSource enemySounds;
     public GameObject healthUI;
     public AudioSource musicManager;
     public AudioClip whispers;
+    public GameObject E;
+    public GameObject buttonUI;
+    public GameObject endScreen;
+    public Animator pHealthAnimator;
+    public Animator eHealthAnimator;
 
     public static event Action<GameState> OnGameStateChanged;
     private void Awake()
@@ -63,6 +70,7 @@ public class Gameplay : MonoBehaviour
             case GameState.PlayerTurn:
                 placement.cardInput(true);
                 ePressed = false;
+                E.SetActive(true);
                 StartCoroutine(playerSelection());
                 break;
             case GameState.PlayerAttack:
@@ -87,7 +95,7 @@ public class Gameplay : MonoBehaviour
                 }
                 updateHealth();
                 Debug.Log("Moving to EnemyTurn");
-                StartCoroutine(turnWait(GameState.EnemyTurn, 2f));
+                StartCoroutine(turnWait(GameState.EnemyTurn, 3.5f));
                 break;
             case GameState.EnemyTurn:
                 if (!ST.isEslotsEmpty())
@@ -152,13 +160,14 @@ public class Gameplay : MonoBehaviour
                 
                 updateHealth();
                 Debug.Log("Moving to PlayerTurn");
-                StartCoroutine(turnWait(GameState.PlayerTurn, 1f));
+                StartCoroutine(turnWait(GameState.PlayerTurn, 3f));
                 break;
             case GameState.Lose:
                 //Play animation (possibly) and end game / go back to main menu
                 lose = true;
                 StartCoroutine(deathAnim());
                 healthUI.SetActive(false);
+                buttonUI.SetActive(false);
                 musicManager.clip = whispers;
                 musicManager.Play();
                 break;
@@ -203,7 +212,7 @@ public class Gameplay : MonoBehaviour
         }
         placement.cardInput(false);
         turns = 2;
-        
+        E.SetActive(false);
         yield return new WaitForSeconds(2f);
         Debug.Log("Player Attack");
         UpdateGameState(GameState.PlayerAttack);
@@ -240,10 +249,14 @@ public class Gameplay : MonoBehaviour
         else if(playerTurn)
         {
             this.enemyHealth -= tempDamage;
+            eHealthAnimator.Play("enemyHit");
+            enemySounds.Play();
         }
         else
         {
             this.playerHealth -= tempDamage;
+            pHealthAnimator.Play("playerHit");
+            playerSounds.Play();
         }
     }
     private void showDamage(int slot, int damage)
