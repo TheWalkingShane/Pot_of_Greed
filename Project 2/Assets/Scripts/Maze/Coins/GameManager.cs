@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
             StartCoroutine(FadeIn());
         }
         else
@@ -151,6 +150,11 @@ public class GameManager : MonoBehaviour
         // Load the new scene where the player is caught
         //SceneManager.LoadScene("Test_Dale");
     }
+
+    public void HandleReturnToMenu()
+    {
+        StartCoroutine(FadeToMenu());
+    }
     //===================================================================
     
     IEnumerator FadeIn()
@@ -184,9 +188,9 @@ public class GameManager : MonoBehaviour
             yield return 0;
         }
         eventListenerGO.SetActive(false);
+        // CardInventory.instance.DestroyInstance();
         SceneManager.LoadScene("MainMenu");
-        CardInventory.instance.DestroyInstance();
-        Instance.DestroyInstance();
+        // Instance.DestroyInstance();
     }
 
     IEnumerator FadeBetween(bool comingFromCard)

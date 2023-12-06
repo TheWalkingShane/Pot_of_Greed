@@ -286,7 +286,7 @@ public class Gameplay : MonoBehaviour
         
         yield return new WaitForSeconds(1.5f);
 
-        StartCoroutine(GameManager.Instance.FadeToMenu());
+        GameManager.Instance.HandleReturnToMenu();
     }
 }
 
