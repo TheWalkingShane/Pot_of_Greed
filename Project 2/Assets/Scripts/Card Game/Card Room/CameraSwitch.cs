@@ -11,6 +11,8 @@ public class CameraSwitch : MonoBehaviour
     private Vector3 newPosition;
     private Quaternion newRotation;
     private bool disable = false;
+    public GameObject W;
+    public GameObject S;
 
 
     // Start is called before the first frame update
@@ -43,12 +45,16 @@ public class CameraSwitch : MonoBehaviour
         {
             newPosition = p2;
             newRotation = r2;
+            W.SetActive(false);
+            S.SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             newPosition = p1;
             newRotation = r1;
+            S.SetActive(false);
+            W.SetActive(true);
         }
 
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * smooth);
