@@ -62,6 +62,10 @@ public class GameManager : MonoBehaviour
         coinsCollected++;
        // Debug.Log("Current Coin Count" + coinsCollected);
         UpdateCoinCounterText();
+        if (coinsCollected == totalCoinsActive)
+        {
+            StartCoroutine(FadeToMenu());
+        }
     }
     public void CollectCard()
     {
