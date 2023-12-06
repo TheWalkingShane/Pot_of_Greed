@@ -239,9 +239,9 @@ Transform:
   m_GameObject: {fileID: 1791839235030982230}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.3, z: 0.1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.20625001, z: 0.0375}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7517229376042145453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -273,7 +273,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d94969bc681f16d4a8dc90c28b16a734, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -362,7 +362,7 @@ MonoBehaviour:
   rotationSpeed: 50
   hoverSpeed: 1
   hoverAmplitude: 0.1
-  startColor: {r: 0.5372549, g: 0.22352941, b: 0.007843138, a: 1}
+  startColor: {r: 0.6792453, g: 0.15699539, b: 0.3852379, a: 1}
   endColor: {r: 0, g: 0.21176471, b: 0.7176471, a: 1}
 --- !u!1 &1908525465040755992
 GameObject:
