@@ -45,10 +45,9 @@ public class Gameplay : MonoBehaviour
     public AudioClip whispers;
     public GameObject E;
     public GameObject buttonUI;
-    public GameObject endScreen;
     public Animator pHealthAnimator;
     public Animator eHealthAnimator;
-
+    private GameObject gameManager;
     public static event Action<GameState> OnGameStateChanged;
     private void Awake()
     {
@@ -60,6 +59,9 @@ public class Gameplay : MonoBehaviour
         UpdateGameState(GameState.PlayerTurn);
         newPosition = new Vector3(0,-0.0249998569f,3);
         monsterSounds = piggy.GetComponent<AudioSource>();
+        gameManager = GameObject.Find("Game Manager");
+        enemyHealth = (gameManager.GetComponent<GameManager>().bossBeaten * 5) + 5;
+        updateHealth();
     }
 
     public void UpdateGameState(GameState newState)
@@ -173,6 +175,7 @@ public class Gameplay : MonoBehaviour
                 break;
             case GameState.Victory:
                 //Go back to maze
+                placement.returnLeftover();
                 StartCoroutine(waitForDestruction());
                 break;
             default:

@@ -11,6 +11,7 @@ public class CardInfo : MonoBehaviour
 {
     public int health;
     public int damage;
+    public Card.CardType type = Card.CardType.BaseKit;
     private TextMeshProUGUI textH;
     private TextMeshProUGUI textD;
 
@@ -43,5 +44,10 @@ public class CardInfo : MonoBehaviour
     {
         health -= damage;
         textH.text = $"HP: {this.health}";
+    }
+
+    public void setType(Card.CardType type)
+    {
+        this.type = type;
     }
 }

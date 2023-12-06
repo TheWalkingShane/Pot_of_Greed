@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CardPlacement : MonoBehaviour
 {
@@ -16,11 +18,11 @@ public class CardPlacement : MonoBehaviour
     public Card[] baseKit;
     private bool blockCardInput = false;
     public Gameplay G;
-    
-    
+    private GameObject gameManager;
 
     private void Start()
     {
+        gameManager = GameObject.Find("Game Manager");
         numOfBaseKit = 4; //Not set in stone (Will be changed later)
         
         //Set baseKit list manually
@@ -32,7 +34,19 @@ public class CardPlacement : MonoBehaviour
         
         //currHand is just a transform for storage
         currHand = this.gameObject;
-        numOfSpecials = 0; //Set somehow once inventory is set up
+        if (gameManager.GetComponent<GameManager>().cardsCollected >= 3)
+        {
+            gameManager.GetComponent<GameManager>().cardsCollected -= 3;
+            gameManager.GetComponent<GameManager>().totalCardsActive -= 3;
+            numOfSpecials = 3;
+        }
+        else
+        {
+            numOfSpecials = gameManager.GetComponent<GameManager>().cardsCollected;
+            gameManager.GetComponent<GameManager>().totalCardsActive -= gameManager.GetComponent<GameManager>().cardsCollected;
+            gameManager.GetComponent<GameManager>().cardsCollected -= gameManager.GetComponent<GameManager>().cardsCollected;
+        }
+        
         for (int i = 0; i < numOfBaseKit; i++)
         {
             currCard = Instantiate(card, currHand.transform.GetChild(i).transform); //Instantiate visual object for card
@@ -46,7 +60,11 @@ public class CardPlacement : MonoBehaviour
 
         for (int i = 0; i < numOfSpecials; i++)
         {
+            int rand = Random.Range(0, 4);
             currCard = Instantiate(card, currHand.transform.GetChild(i + numOfBaseKit).transform); //Instantiate visual object for card
+            currCard.GetComponent<CardInfo>().setCard(CLU.specialCardList[rand].health, CLU.specialCardList[rand].damage);
+            currCard.GetComponent<CardInfo>().setType(Card.CardType.Special);
+            currCard.GetComponent<MeshRenderer>().material.mainTexture = CLU.specialCardList[rand].cardImage;
             //Todo read card from inventory and add it to hand
         }
     }
@@ -107,6 +125,10 @@ public class CardPlacement : MonoBehaviour
                             selected.transform.position = slotPositions[0].position;
                             selected.transform.rotation = Quaternion.Euler(0,0,0);
                             //set selected card to null
+                            if (selected.GetComponent<CardInfo>().type == Card.CardType.Special)
+                            {
+                                numOfSpecials--;
+                            }
                             selected = null;
                             G.cardPlaced();
                         }
@@ -117,6 +139,10 @@ public class CardPlacement : MonoBehaviour
                             selected.transform.position = slotPositions[1].position;
                             selected.transform.rotation = Quaternion.Euler(0,0,0);
                             //set selected card to null
+                            if (selected.GetComponent<CardInfo>().type == Card.CardType.Special)
+                            {
+                                numOfSpecials--;
+                            }
                             selected = null;
                             G.cardPlaced();
                         }
@@ -127,6 +153,10 @@ public class CardPlacement : MonoBehaviour
                             selected.transform.position = slotPositions[2].position;
                             selected.transform.rotation = Quaternion.Euler(0,0,0);
                             //set selected card to null
+                            if (selected.GetComponent<CardInfo>().type == Card.CardType.Special)
+                            {
+                                numOfSpecials--;
+                            }
                             selected = null;
                             G.cardPlaced();
                         }
@@ -155,6 +185,15 @@ public class CardPlacement : MonoBehaviour
         //     Debug.Log(card1I.health + " | " + card1I.damage);
         //     Debug.Log(card2I.health + " | " + card2I.damage);
         // }
+    }
+
+    public void returnLeftover()
+    {
+        if (numOfSpecials >= 1)
+        {
+            gameManager.GetComponent<GameManager>().cardsCollected += numOfSpecials;
+            gameManager.GetComponent<GameManager>().totalCardsActive += numOfSpecials;
+        }
     }
 
     public void cardInput(bool b)
