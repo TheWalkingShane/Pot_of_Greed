@@ -164,6 +164,7 @@ public class Gameplay : MonoBehaviour
                 break;
             case GameState.Victory:
                 //Go back to maze
+                GameManager.Instance.HandleReturnToMaze();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -282,6 +283,10 @@ public class Gameplay : MonoBehaviour
         piggy.transform.rotation = dStart.transform.rotation;
         lunge = true;
         monsterSounds.Play();
+        
+        yield return new WaitForSeconds(1.5f);
+
+        StartCoroutine(GameManager.Instance.FadeToMenu());
     }
 }
 

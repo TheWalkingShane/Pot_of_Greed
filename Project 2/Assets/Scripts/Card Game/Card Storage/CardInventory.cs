@@ -41,6 +41,11 @@ public class CardInventory : MonoBehaviour
         _cards.AddRange(cardSelection.cardList);
     }
 
+    public void DestroyInstance()
+    {
+        Destroy(this);
+    }
+
     public static List<Card> GetCards()
     {
         return _cards;
