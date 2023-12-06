@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
+/// <summary>
+/// DEPRECATED
+/// </summary>
 public class SceneSwitcher : MonoBehaviour
 {
     private static SwitcherMethod _method = SwitcherMethod.Additive;
     private GameObject playerGO;
+    public Image img;
+    public AnimationCurve curve;
     public string toScene = "MazeMain";
     public string fromScene = "CardsMain";
 
@@ -14,6 +20,7 @@ public class SceneSwitcher : MonoBehaviour
     void Start()
     {
         playerGO = FindObjectOfType<AudioListener>().transform.parent.parent.gameObject;
+        StartCoroutine(FadeIn());
     }
 
     // Update is called once per frame
@@ -44,9 +51,48 @@ public class SceneSwitcher : MonoBehaviour
         }
     }
 
+    public void FadeTo(string scene)
+    {
+        StartCoroutine(FadeOut(scene));
+    }
+
     void SwapToScene(string scene)
     {
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
+    }
+    
+    IEnumerator FadeIn()
+    {
+        float t = 1f;
+
+        while (t > 0)
+        {
+            t -= Time.deltaTime;
+            float a = curve.Evaluate(t);
+            
+            img.color = new Color(0, 0, 0, a);
+            
+            // wait a frame, then continue
+            yield return 0;
+        }
+    }
+    
+    IEnumerator FadeOut(string scene)
+    {
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime;
+            float a = curve.Evaluate(t);
+            
+            img.color = new Color(0, 0, 0, a);
+            
+            // wait a frame, then continue
+            yield return 0;
+        }
+
+        SceneManager.LoadScene(scene);
     }
 
     // Additively load scene

@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Scenes (DO NOT EDIT)/CardsMain.unity
     guid: dacce8c509328bc44b920fc7985c53e8
+  - enabled: 1
+    path: Assets/Scenes/Main Scenes (DO NOT EDIT)/MainMenu.unity
+    guid: c02b15e0772e0584589c4ff66f8a4f4b
   m_configObjects: {}
