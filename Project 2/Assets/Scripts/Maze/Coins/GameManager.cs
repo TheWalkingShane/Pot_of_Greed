@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerGO;
     public GameObject eventListenerGO;
+    public GameObject mazeCanvas;
     
     public Image img;
     public AnimationCurve curve;
@@ -204,6 +205,7 @@ public class GameManager : MonoBehaviour
 
         if (comingFromCard)
         {
+            mazeCanvas.SetActive(true);
             SceneManager.UnloadSceneAsync("CardsMain", UnloadSceneOptions.None);
             playerGO.SetActive(true);
         
@@ -212,6 +214,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            mazeCanvas.SetActive(false);
             SceneManager.LoadScene("CardsMain", LoadSceneMode.Additive);
             playerGO.SetActive(false);
 

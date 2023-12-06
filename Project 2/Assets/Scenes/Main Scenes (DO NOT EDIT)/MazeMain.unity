@@ -1366,6 +1366,7 @@ MonoBehaviour:
   cardCounterText: {fileID: 1485851070}
   playerGO: {fileID: 1653888071}
   eventListenerGO: {fileID: 1249170026}
+  mazeCanvas: {fileID: 840920047}
   img: {fileID: 1931410209}
   curve:
     serializedVersion: 2
