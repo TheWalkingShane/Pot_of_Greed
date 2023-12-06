@@ -135,13 +135,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: MazeMonster
       objectReference: {fileID: 0}
-    - target: {fileID: 2732245020760628160, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
-      propertyPath: m_TagString
-      value: Monster
+    - target: {fileID: 3383815070022196055, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5823823887585599612, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
-      propertyPath: m_TagString
-      value: Monster
+    - target: {fileID: 3383815070022196055, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
+      propertyPath: MaxDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383815070022196055, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383815070022196055, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7124466972726710716, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
       propertyPath: m_LocalPosition.x
@@ -184,33 +192,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8492840632879178681, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
-      propertyPath: viewRange
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8492840632879178681, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
-      propertyPath: chaseSpeed
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8492840632879178681, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
-      propertyPath: catchRadius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8492840632879178681, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1573086524}
-    - target: {fileID: 8492840632879178681, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
-      propertyPath: obstacleMask.m_Bits
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 8492840632879178681, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
-      propertyPath: waitTimeBetweenRoam
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8492840632879178681, guid: e827f006fc1e72448ab54bfe0dca4087, type: 3}
-      propertyPath: lineOfSightMask.m_Bits
-      value: 4294967295
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
