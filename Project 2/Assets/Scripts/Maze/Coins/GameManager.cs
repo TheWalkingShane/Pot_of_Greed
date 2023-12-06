@@ -21,10 +21,12 @@ public class GameManager : MonoBehaviour
     public AnimationCurve curve;
     
     private int totalCoinsActive;
-    private int totalCardsActive;
+    public int totalCardsActive;
     
     private int coinsCollected;
-    private int cardsCollected;
+    public int cardsCollected;
+
+    public int bossBeaten = 1;
 
 
     void Awake()
@@ -132,6 +134,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(FadeBetween(true));
 
         // Re-enable state changes for the monster
+        UpdateCardCounterText();
+        bossBeaten++;
         MonsterController.Instance.AllowStateChange();
 
         // Transition the monster back to RoamingState
