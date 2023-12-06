@@ -41,6 +41,17 @@ public class SlotTracking : MonoBehaviour
         cards[slot] = null;
     }
 
+    public void emptySlots()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (isTaken(i))
+            {
+                emptySlot(i);
+            }
+        }
+    }
+
     public bool isEslotsEmpty()
     {
         if(isTaken(3) && isTaken(4) && isTaken(5))

@@ -173,7 +173,7 @@ public class Gameplay : MonoBehaviour
                 break;
             case GameState.Victory:
                 //Go back to maze
-                GameManager.Instance.HandleReturnToMaze();
+                StartCoroutine(waitForDestruction());
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -283,11 +283,11 @@ public class Gameplay : MonoBehaviour
     private IEnumerator deathAnim()
     {
         float manWait = 0;
+        ST.emptySlots();
         int rand = Random.Range(0, 11);
         CS.disableCam();
         yield return new WaitForSeconds(3f);
         slideDone = true;
-        Debug.Log(rand);
         yield return new WaitForSeconds(rand);
         musicManager.Stop();
         cam.transform.position = dCam.position;
@@ -296,10 +296,18 @@ public class Gameplay : MonoBehaviour
         piggy.transform.rotation = dStart.transform.rotation;
         lunge = true;
         monsterSounds.Play();
+        ST.emptySlots();
         
         yield return new WaitForSeconds(1.5f);
 
         GameManager.Instance.HandleReturnToMenu();
+    }
+
+    private IEnumerator waitForDestruction()
+    {
+        ST.emptySlots();
+        yield return new WaitForSeconds(3f);
+        GameManager.Instance.HandleReturnToMaze();
     }
 }
 
