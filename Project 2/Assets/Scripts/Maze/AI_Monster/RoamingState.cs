@@ -113,7 +113,7 @@ public class ChasingState : IMonsterState
     private float reactionTimer;
     private float catchRadius; // The radius within which the player is considered caught
     public float CatchRadius => catchRadius;  // Public getter for the catch radius
-    private float timeToLosePlayer = 6f; // Time in seconds to switch back to RoamingState if player is lost
+    private float timeToLosePlayer = 3f; // Time in seconds to switch back to RoamingState if player is lost
     private float timeSinceLastSeenPlayer;
     
     private float viewRange; // Max distance to see the player
@@ -152,19 +152,21 @@ public class ChasingState : IMonsterState
         {
             // Continue chasing the player
             agent.SetDestination(playerTransform.position);
+            Debug.Log(Vector3.Distance(monsterTransform.position, playerTransform.position));
+
+            
+            if (Vector3.Distance(monsterTransform.position, playerTransform.position) <= catchRadius)
+            {
+                // Transition to IdleState
+                GameManager.Instance.ChangeToCaughtScene();
+            }
+            
             if (CanSeePlayer())
             {
                 timeSinceLastSeenPlayer = 0f; // Reset the timer as the player is seen
                 agent.SetDestination(playerTransform.position);
                 // Check if the player is within catch radius
-                if (Vector3.Distance(monsterTransform.position, playerTransform.position) <= catchRadius)
-                {
-                    // Transition to IdleState
-                    GameManager.Instance.ChangeToCaughtScene();
-                   // float idleDuration = 5f; // Idle for 5 seconds
-                   // IMonsterState idleState = new IdleState(monsterTransform.GetComponent<MonsterController>(), idleDuration);
-                   // monsterTransform.GetComponent<MonsterController>().TransitionToState(idleState);
-                }
+
             }
             else
             {
